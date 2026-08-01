@@ -5,10 +5,15 @@
 ### 1.1 제품 정의
 
 `qlibx`는 Qlib을 실행 기반으로 사용하는 alpha research framework다. Quant researcher와 AI coding
-agent가 다음 작업을 하나의 재사용 가능한 연구 환경에서 수행하도록 돕는다.
+agent를 중심으로 analyst, independent reviewer와 portfolio manager가 다음 작업을 하나의 재사용 가능한
+연구 환경에서 수행하거나 검토하도록 돕는다. 사용자는 하나의 고정된 persona를 가져야 하지 않으며,
+같은 사용자가 task에 따라 research proposer, reviewer 또는 implementation-feasibility reviewer 역할을
+수행할 수 있다.
 
 - 프로젝트 데이터를 logical dataset으로 등록한다.
 - Signed long-short alpha를 만들고 평가한다.
+- 기간, market regime, cost와 execution assumption을 바꾸어 alpha의 robustness와 failure boundary를
+  평가한다.
 - 고정된 규칙 또는 적응형 `StrategyAgent`를 실행한다.
 - 저장된 alpha를 다시 실행하지 않고 ensemble한다.
 - Signed active intent를 long-only enhanced index portfolio로 변환한다.
@@ -67,23 +72,62 @@ serializable artifact를 주고받아야 한다. 사용자는 raw backtest resul
 worktree는 필요하지 않다. Session isolation, frozen run input, conflict detection과 safe result
 publication은 사용자가 매번 요청하는 option이 아니라 기본 behavior다.
 
-### 1.3 지원하는 전체 research flow
+### 1.3 Reference research flow
+
+Core alpha research flow는 다음과 같다.
 
 ```text
-project-owned data
+research question과 hypothesis
+-> project-owned data
 -> point-in-time availability를 가진 logical dataset
+-> bounded proposal과 alpha trial
 -> fixed 또는 adaptive StrategyAgent
 -> ticker-level signed alpha
+-> robustness, scenario와 prior-research comparison
+-> reusable evidence, research decision과 next action
+```
+
+필요한 경우 verified alpha가 현실적인 portfolio와 execution assumption에서도 의미를 유지하는지 평가할
+수 있다. 이 optional implementation-aware evaluation flow는 다음과 같다.
+
+```text
+verified stored signed alpha
 -> stored-alpha ensemble과 ticker-level netting
 -> benchmark-relative active intent
 -> long-only enhanced index portfolio
--> Qlib order / fill / position / account lifecycle
--> reusable artifact, report와 next-decision feedback
+-> Qlib-simulated order / fill / position / account lifecycle
+-> intended-versus-simulated-realized implementation diagnostics
+-> reusable evidence와 report
 ```
 
 `qlibx`의 중요한 capability는 long-short alpha research, 여러 long-short alpha의 ensemble, long-only
-enhanced index portfolio와 실제 Qlib execution을 하나의 lineage로 연결하면서 original active intent와
-realized result를 함께 관측할 수 있다는 점이다.
+enhanced index portfolio와 Qlib-simulated execution을 하나의 lineage로 연결하면서 original active
+intent와 simulated-realized result를 함께 관측할 수 있다는 점이다.
+
+두 flow는 reference journey이며 mandatory end-to-end pipeline이 아니다. Alpha research는 benchmark,
+portfolio 또는 fund mandate 없이 수행할 수 있다. Implementation-aware evaluation은 alpha를 실제 fund에
+승인, 배치 또는 운용하는 workflow가 아니라 user-provided assumption 아래 alpha의 cost, capacity,
+constraint와 execution sensitivity를 연구하는 optional stage다.
+
+### 1.4 User role과 task context
+
+qlibx onboarding은 user에게 하나의 permanent persona를 선택하도록 요구하지 않는다. Role은 project
+identity가 아니라 task 또는 review에 대한 responsibility를 나타낸다.
+
+Possible research role은 다음을 포함할 수 있다.
+
+- Research proposer 또는 research lead
+- Quant researcher
+- Domain analyst
+- Data reviewer
+- Independent research reviewer
+- Implementation-feasibility reviewer
+- Final research decision reviewer
+
+Role은 guidance, required question, review perspective와 decision authority를 조정할 수 있지만 같은
+evidence의 계산 의미를 바꾸거나 role에 따라 서로 다른 사실을 만들어서는 안 된다. Portfolio manager도
+alpha의 implementation feasibility를 검토하는 user가 될 수 있지만 qlibx가 실제 fund operation 또는
+approval system이 되는 것은 아니다.
 
 ## 2. Product boundaries
 
@@ -93,7 +137,9 @@ realized result를 함께 관측할 수 있다는 점이다.
 - Agent onboarding, documentation과 skill resource
 - StrategyAgent input, output, state와 nested research
 - Signed alpha, transform, budget과 diagnostics
+- Robustness, scenario와 failure-boundary research
 - Stored-alpha ensemble과 enhanced index construction
+- User-provided portfolio와 execution assumption을 사용한 optional implementation-aware alpha evaluation
 - Qlib long-only account에서 signed alpha를 관측하기 위한 compatibility mode
 - Research workspace, artifact와 centralized catalog
 - Project-local extension registration과 artifact compatibility
@@ -108,7 +154,9 @@ realized result를 함께 관측할 수 있다는 점이다.
 - Position, cash, cost, account value와 portfolio feedback
 
 `qlibx`는 Qlib input을 adapt하고 output을 관측할 수 있지만, Qlib account와 별도로 움직일 수 있는 두
-번째 execution engine을 유지해서는 안 된다.
+번째 execution engine을 유지해서는 안 된다. 여기서 Qlib의 dealt quantity, position과 account는
+backtest 안에서 확인된 simulated-realized state다. Live broker fill 또는 실제 fund state를 의미하지
+않는다.
 
 ### 2.3 사용자의 project가 소유하는 것
 
@@ -116,7 +164,8 @@ realized result를 함께 관측할 수 있다는 점이다.
 - Dataset, strategy, model, portfolio와 reporting config
 - 조직별 benchmark, sector, factor, constraint와 cost definition
 - Local extension source
-- Research objective, evaluation policy와 promotion decision
+- Research objective, evaluation policy와 research-promotion decision
+- Optional implementation-aware evaluation assumption과 실제 fund application에 대한 외부 decision
 
 `qlibx` 설치와 upgrade는 project-owned definition을 자동으로 설치하거나 조용히 수정해서는 안 된다.
 
@@ -128,6 +177,8 @@ realized result를 함께 관측할 수 있다는 점이다.
 - Git branch, worktree 또는 merge를 관리하는 일
 - Signal이 완전한 market-neutral 또는 sector-neutral임을 보장하는 일
 - User-defined evidence와 criteria 없이 경제적 가설의 투자 가능성을 대신 결정하는 일
+- 실제 fund application approval, investment-committee 또는 compliance workflow를 관리하는 일
+- Broker에 live order를 제출하거나 실제 fund position과 operation lifecycle을 관리하는 일
 
 ### 2.5 금지해야 하는 behavior
 
@@ -136,6 +187,8 @@ realized result를 함께 관측할 수 있다는 점이다.
 - Synthetic inverse ticker 매수로 underlying short를 흉내 낸다.
 - Long leg와 short leg를 관계없는 account에서 실행한 뒤 PnL만 합친다.
 - Requested target 또는 별도 signed ledger를 realized Qlib holding으로 취급한다.
+- Qlib-simulated fill 또는 holding을 live broker fill 또는 실제 fund holding으로 표시한다.
+- Research promotion 또는 implementation-feasibility result를 실제 fund application approval로 표시한다.
 - Flexible budget의 unused amount를 복원하거나 관계없는 security에 배분한다.
 - 이미 관측한 기간을 true forward out-of-sample로 표시한다.
 - 다른 agent가 config를 수정하여 이미 시작된 run의 의미를 바꾸게 한다.
@@ -169,7 +222,23 @@ qlibx add skill --target claude
 - Setup을 반복해도 managed instruction block이 중복되지 않는다.
 - 기존 user-authored content를 덮어쓰지 않는다.
 
-### 3.3 Agent에게 data registration 요청
+### 3.3 Task-scoped research context
+
+Initial onboarding은 permanent user persona, fund mandate 또는 portfolio constraint를 요구하지 않는다.
+User는 data registration, alpha research 또는 stored-result inspection처럼 필요한 작업부터 시작할 수
+있어야 한다.
+
+Agent는 task를 수행하는 데 필요한 context만 점진적으로 확인한다.
+
+- Alpha research에서는 research question, hypothesis, data, observation clock, horizon과 evaluation
+  objective를 확인한다.
+- Robustness study에서는 baseline result, 바꿀 condition, comparison rule과 사전 계획 여부를 확인한다.
+- Implementation-aware evaluation을 명시적으로 요청한 경우에만 benchmark, portfolio constraint, cost,
+  capacity와 execution assumption을 확인한다.
+- User role 또는 requested review perspective는 guidance와 report composition에 사용할 수 있지만 evidence
+  semantics를 변경하지 않는다.
+
+### 3.4 Agent에게 data registration 요청
 
 Onboarding이 끝나면 user request는 짧을 수 있다.
 
@@ -189,7 +258,7 @@ User는 다음 결과를 review한다.
 - Validation과 bounded load smoke result
 - Agent가 추측하지 않고 남긴 질문
 
-### 3.4 Agent에게 alpha research 요청
+### 3.5 Agent에게 alpha research 요청
 
 User는 qlibx operation을 설명하는 대신 research objective를 말할 수 있어야 한다.
 
@@ -201,13 +270,27 @@ User는 qlibx operation을 설명하는 대신 research objective를 말할 수 
 Installed skill은 agent가 prior research를 조회하고, bounded proposal을 등록하고, isolated session에서
 trial을 실행하고, artifact와 decision을 publish하도록 안내해야 한다.
 
-### 3.5 Stored result 재사용
+### 3.6 Robustness와 scenario research
+
+User는 하나의 baseline alpha를 여러 기간, market regime, cost, capacity와 execution assumption에서
+비교하도록 요청할 수 있다.
+
+```text
+이 reversal alpha를 강세장, 약세장과 고변동성 기간으로 나눠 비교해줘.
+보유기간과 거래비용을 바꿨을 때도 공통적으로 유지되는 결과와 무너지는 조건을 모두 남겨줘.
+```
+
+Agent는 가장 좋은 variation만 선택하지 않고 planned comparison과 result를 본 뒤 추가한 exploratory
+comparison을 구분한다. Result는 공통적으로 유지된 evidence, fragile condition, missing comparison과
+conclusion boundary를 제공해야 한다.
+
+### 3.7 Stored result 재사용
 
 User는 stored alpha 비교, ensemble, enhanced index portfolio, Qlib backtest 또는 custom report를 요청할
 수 있다. Result identity를 정의하는 input이 바뀌지 않았다면 original strategy를 다시 실행하지 않고
 stored artifact를 재사용해야 한다.
 
-### 3.6 Project 기능 확장
+### 3.8 Project 기능 확장
 
 Built-in module이 충분하지 않으면 user는 local Python implementation을 요청할 수 있다.
 
@@ -247,6 +330,9 @@ Agent는 변경 전에 다음을 확인한다.
 - qlibx와 schema version
 - Registered dataset과 component
 - Centralized research catalog와 active session
+- Requested task가 core alpha research, robustness study 또는 optional implementation-aware evaluation 중
+  어디에 해당하는지
+- Applicable한 user-provided review role과 research decision authority
 - 요청한 action이 만들거나 바꿀 file
 
 ### 4.3 Project data 등록
@@ -275,8 +361,30 @@ Agent는 비슷해 보이는 column name만으로 경제적 의미를 확정해�
 5. hypothesis, mechanism, input, clock, horizon, transform, evaluation segment와 stopping condition을 가진
    bounded proposal을 작성한다.
 6. candidate가 new alpha인지, existing alpha family variation인지, diagnostic trial인지 구분한다.
+7. Comparison이 사전에 계획된 confirmatory test인지, result를 본 뒤 추가한 exploratory test인지 기록한다.
+8. 필요한 경우 robustness axis와 independent review role을 지정한다.
 
-### 4.5 Research 실행과 publish
+### 4.5 Optional collaborative research role
+
+복합 data, 중요한 promotion candidate, robustness review 또는 implementation-aware evaluation처럼 서로
+다른 종류의 검토가 필요한 task는 optional collaborative research session을 사용할 수 있다. Role은
+사람 같은 character를 흉내 내는 persona가 아니라 누락하면 안 되는 research responsibility를 나타낸다.
+
+Possible role은 research lead, data reviewer, quant researcher, domain analyst, independent reviewer와
+implementation-feasibility reviewer를 포함할 수 있다. 각 role request는 다음을 명시한다.
+
+- Assigned research question과 allowed input
+- Required comparison과 expected output
+- Independent review가 필요한지 여부
+- Project state에 허용되는 side effect
+- Recommendation과 final research decision authority
+
+각 role은 conversation summary만이 아니라 serializable evidence 또는 review record를 반환한다. Research
+lead가 evidence synthesis를 만들더라도 disagreement, unresolved warning과 missing comparison을 제거해서는
+안 된다. 모든 trial에 team을 요구하지 않으며 단일 agent가 contract를 만족할 수 있는 bounded task는
+단일 session으로 실행할 수 있다.
+
+### 4.6 Research 실행과 publish
 
 Agent는 isolated research session을 시작한다. Run 시작 시 resolved config, dataset snapshot, component
 version과 seed를 해당 run에 고정한다.
@@ -288,18 +396,19 @@ Research workspace는 scratchpad로 사용할 수 있다. Completed trial은 다
 - Metric, exposure, turnover, cost와 availability diagnostics
 - Success, failure 또는 invalid status
 - Existing research와의 비교
+- Applicable한 role별 review와 unresolved disagreement
 - Concise research decision과 next action
 
 Scratch에만 남은 incomplete output은 completed alpha로 catalog에 나타나서는 안 된다.
 
-### 4.6 Built-in 사용 또는 extension 추가
+### 4.7 Built-in 사용 또는 extension 추가
 
 Agent는 common helper를 작성하기 전에 installed documentation에서 현재 version의 built-in과 extension
 contract를 확인한다. Compatible built-in이 없으면 해당 extension point가 요구하는 input, output,
 lifecycle과 validation rule을 읽고 project-local code를 만든다. 실제 연결 방식은 그 extension contract에
 따르며 site-packages를 수정하지 않는다.
 
-### 4.7 Stored evidence에서 다음 연구 시작
+### 4.8 Stored evidence에서 다음 연구 시작
 
 다른 agent는 이전 agent의 전체 scratchpad를 읽지 않고도 proposal, run, artifact, decision과
 nearest-neighbor record를 catalog에서 가져와 다음 trial을 정의할 수 있어야 한다.
@@ -314,11 +423,12 @@ write mechanism을 지정해 달라고 요구하지 않는다.
 Installed package는 다음 주제의 version-matched documentation을 제공해야 한다.
 
 - Project initialization
+- Task-scoped research context, optional research role과 collaborative review
 - Data discovery, config authoring, validation과 registration
 - StrategyAgent와 nested child research
 - Alpha transform, exposure analysis와 budget behavior
-- Research catalog와 orthogonality workflow
-- Ensemble, enhanced index construction과 Qlib execution
+- Research catalog, orthogonality, robustness와 scenario workflow
+- Ensemble, implementation-aware enhanced index construction과 Qlib-simulated execution
 - 현재 제공되는 extension point, 정확한 input/output contract와 local extension authoring
 - Raw artifact와 reporting contract
 - Error code와 recovery guidance
@@ -373,6 +483,7 @@ Skill generator는:
 
 - Project와 data registration
 - Orthogonal alpha research
+- Task-scoped research role, robustness와 scenario research
 - 현재 qlibx version에서 제공되는 extension point와 project-local extension authoring
 
 Skill은 extension point 이름만 나열해서는 안 된다. 각 point가 workflow의 어디에 연결되는지, 어떤
@@ -529,6 +640,11 @@ execution 전에 실패한다.
 
 ### 7.1 Definition
 
+`StrategyAgent`는 market data와 bounded feedback을 받아 declared investment decision을 만드는 strategy
+component다. Data reviewer, quant research agent, independent reviewer와 같은 coding-agent research role과
+다른 개념이다. Research role은 StrategyAgent를 만들거나 평가할 수 있지만 그 role 자체가 Qlib account에
+제출되는 investment strategy는 아니다.
+
 StrategyAgent는 기본적으로 deterministic decision program이다. Effective decision context, strategy definition,
 dependency version, checkpoint state와 declared seed가 같으면 같은 decision result를 반환해야 한다.
 (예외 존재. 특수한 경우 전략 내에서 random output을 내는 요소가 존재하거나 본질적으로 stochastic한 LLM agent가 embedded 되어있을 수 있음. 하지만 대부분의 일반적인 경우 StrategyAgent는 기본적으로 deterministic.)
@@ -593,13 +709,13 @@ parent의 bounded 120-day context
 -> child strategy A, B, C 실행
 -> selected evaluator로 child result 비교
 -> parent의 next action 선택
--> parent action만 actual Qlib account에 제출
+-> parent action만 Qlib backtest account에 제출
 ```
 
 Nested-research request는 child definition, allowed warmup/evaluation slice, evaluator, seed와 resource limit을
 명시한다. Return value는 serializable child result, metric, diagnostics와 failure status다.
 
-Child run은 actual Qlib account, parent state 또는 sibling state를 변경하지 않는다. Parent decision 안에서
+Child run은 Qlib backtest account, parent state 또는 sibling state를 변경하지 않는다. Parent decision 안에서
 수행되는 historical what-if evaluation이다.
 
 ### 7.4 ML과 belief update
@@ -616,7 +732,7 @@ Child run은 actual Qlib account, parent state 또는 sibling state를 변경하
 바꾸는 것이 아니다. 사용하는 strategy는 model version, train/evaluation window, evidence, posterior와
 selected action을 optional diagnostics로 남길 수 있다.
 
-Historical evaluation, model fitting, prediction과 belief update는 actual Qlib account를 변경하지 않는다.
+Historical evaluation, model fitting, prediction과 belief update는 Qlib backtest account를 변경하지 않는다.
 
 ### 7.5 Feedback와 resume
 
@@ -735,7 +851,7 @@ scratchpad로 사용할 수 있다. Scratch file은 canonical research record가
 - Referenced dataset, strategy와 사용한 implementation identity
 - Proposal과 run ID
 - Key comparison과 result
-- Success, failure, rejection 또는 follow-up decision
+- Run status, evidence conclusion과 research decision
 - Nearest prior work와 다른 점
 - Catalog에 등록된 canonical artifact reference
 
@@ -761,10 +877,12 @@ Catalog는 다음을 저장하거나 reference한다.
 - Alpha definition과 parameter
 - Successful, failed, invalid와 incomplete run
 - Model, signal, weight, ensemble, portfolio와 backtest artifact
+- Robustness study, scenario result와 evidence synthesis
 - Exposure, performance, turnover와 cost result
 - Parent/child와 supersede lineage
-- Promotion, rejection과 diagnostic decision
-- Research session과 agent identity
+- Research promotion, rejection과 diagnostic decision
+- Research session, assigned role, agent와 reviewer identity
+- External fund decision과 혼동되지 않는 optional user annotation
 
 Storage engine과 atomic-write implementation은 architecture decision이다. 이 PRD는 observable catalog
 behavior를 정의한다.
@@ -787,6 +905,7 @@ Agent는 새 trial을 제안하기 전에 다음 bounded context를 조회할 �
 - Registered와 superseded alpha
 - Successful, failed와 invalid trial
 - Searched parameter range
+- Completed와 active robustness study와 scenario range
 - Active proposal
 - Nearest semantic/empirical neighbor
 - Available dataset snapshot과 known time limitation
@@ -807,7 +926,7 @@ variation과 genuinely separate alpha family를 구분해야 한다.
 
 Result에는 reference pool, evaluation segment, missing comparison, metric과 threshold를 기록한다.
 
-### 9.6 Proposal과 decision record
+### 9.6 Proposal과 study plan
 
 Bounded proposal은 다음을 명시한다.
 
@@ -818,11 +937,51 @@ Bounded proposal은 다음을 명시한다.
 - Evaluation segment와 comparison set
 - Cost와 capacity assumption
 - Stopping condition과 search limit
+- Discovery, confirmatory 또는 diagnostic study 구분
+- 사전에 계획한 comparison과 result 이후 추가한 exploratory comparison 구분
+- 필요한 robustness axis와 research review role
 
-Promotion, rejection, diagnostic retention과 supersede decision은 evidence run, decision criteria, reviewer
-identity와 rationale을 reference한다. Failed trial도 이후 agent가 조회할 수 있어야 한다.
+### 9.7 Robustness와 scenario study
 
-### 9.7 Parallel-agent behavior
+Robustness study는 하나의 baseline alpha 또는 compatible stored result가 기간, market regime, universe,
+holding horizon, cost, capacity와 execution assumption 변화에서도 어떤 behavior를 유지하는지 평가한다.
+이는 최고 metric을 만드는 variation을 선택하는 parameter search와 구분한다.
+
+Robustness study는 다음을 포함한다.
+
+- Baseline alpha, run과 artifact ID
+- Variation axis, selected value와 선택 이유
+- Common evaluation rule과 comparable segment
+- Pre-declared comparison과 exploratory comparison 구분
+- 모든 completed, failed와 invalid scenario result
+- Condition 사이에서 공통으로 유지된 evidence
+- Result가 약화되거나 방향이 바뀌는 fragile condition과 failure boundary
+- Missing comparison, small-sample warning과 conclusion scope
+
+Bull, bear, high-volatility 또는 event period처럼 사후에 붙인 regime label은 historical interpretation에
+사용할 수 있다. Strategy가 decision time에 regime label을 사용하여 action을 바꾸는 경우에는 당시
+available한 observation만으로 그 regime을 판단할 수 있었음을 별도로 validate해야 한다. 자연재해처럼
+희소한 event window는 일반적 성능의 증명으로 과장하지 않고 bounded case study로 표시한다.
+
+### 9.8 Evidence conclusion과 research decision record
+
+Run이 정상적으로 완료된 사실과 hypothesis가 지지되거나 alpha가 다음 연구 단계로 이동하는 decision을
+같은 status로 표현해서는 안 된다. 최소한 다음 dimension을 구분한다.
+
+- Run status: complete, failed, invalid 또는 incomplete
+- Evidence conclusion: supported, challenged 또는 inconclusive
+- Research decision: follow-up, revise, retain-diagnostic, reject, supersede 또는 research-promote
+
+`research-promote`는 robustness study, ensemble study 또는 implementation-aware evaluation 같은 다음
+research stage로 이동할 수 있다는 뜻이다. 실제 fund application approval을 의미하지 않는다.
+
+Research decision은 evidence run, decision criteria, reviewer identity, assigned role, rationale, unresolved
+warning과 next action을 reference한다. Agent recommendation과 authorized user의 research decision을
+구분할 수 있어야 한다. Failed trial도 이후 agent가 조회할 수 있어야 한다. 외부 investment committee
+또는 fund decision은 optional user annotation으로 reference할 수 있지만 qlibx lifecycle state로 관리하지
+않는다.
+
+### 9.9 Parallel과 collaborative-agent behavior
 
 Same-branch, no-worktree operation이 default다. Product는 다음을 보장한다.
 
@@ -836,13 +995,33 @@ Same-branch, no-worktree operation이 default다. Product는 다음을 보장한
 8. Incomplete publication은 complete result로 보이지 않는다.
 9. Crashed agent는 다른 session 또는 completed result를 손상시키지 않는다.
 10. Stale promotion 또는 update는 명시적으로 실패한다.
+11. Collaborative role별 evidence와 disagreement는 독립적으로 query할 수 있다.
+12. Evidence synthesis는 unresolved warning, missing comparison 또는 dissenting review를 제거하지 않는다.
 
 User와 agent는 lock 또는 atomic file replacement mechanism을 선택하지 않는다. 그것은 이 behavior를
 만족해야 하는 implementation detail이다.
 
-## 10. Ensemble and enhanced index
+## 10. Ensemble and implementation-aware alpha evaluation
 
-### 10.1 Stored-alpha ensemble
+### 10.1 Optional portfolio evaluation context와 boundary
+
+Alpha research, robustness study와 stored-alpha comparison은 benchmark 또는 fund mandate 없이 수행할 수
+있다. User가 alpha의 implementation feasibility를 명시적으로 평가하려는 경우에만 optional portfolio
+evaluation context를 제공한다.
+
+이 context는 다음을 포함할 수 있다.
+
+- Benchmark와 point-in-time member weight
+- 허용하는 stock과 ETF universe
+- Long-only, per-name, sector, factor, cash와 turnover constraint
+- Portfolio size, cost, lot와 volume-participation assumption
+- Rebalance timing과 execution convention
+
+이 context는 특정 fund의 공식 mandate 또는 compliance record일 필요가 없으며 research assumption일 수
+있다. Result는 어떤 assumption에서 alpha intent가 얼마나 구현되었는지 설명하는 research evidence다.
+실제 fund application approval, live target 또는 broker instruction으로 표시해서는 안 된다.
+
+### 10.2 Stored-alpha ensemble
 
 Ensemble은 verified stored alpha artifact를 input으로 사용하며 요구되지 않는다면 member strategy를 다시 실행하지 않는다.
 
@@ -870,7 +1049,7 @@ Ensemble result는 다음을 제공한다.
 Ensemble 자체가 StrategyAgent가 되어 prior evidence로 member allocation을 변경할 수도 있다. 이 경우에도
 bounded context, deterministic input/result와 no-account-side-effect requirement를 따른다.
 
-### 10.2 Enhanced index construction
+### 10.3 Enhanced index construction
 
 Ensemble은 benchmark-relative active intent를 나타낸다. Enhanced index constructor는 이를 현재 지원하는
 stock, ETF와 cash로 구현되는 long-only portfolio로 변환한다.
@@ -908,7 +1087,7 @@ Qlib의 기본 enhanced-index 기능은 ETF를 하나의 physical instrument로 
 constituent exposure를 자동으로 인식하지 않는다. ETF look-through constraint와 attribution에는 별도의
 point-in-time constituent dataset과 qlibx exposure 계산 기능이 필요하다.
 
-### 10.3 Physical instrument와 ETF look-through
+### 10.4 Physical instrument와 ETF look-through
 
 Qlib API는 `stock_id`라는 이름을 널리 사용하지만 실제 Position은 instrument ID별 amount, price와 weight를
 보유하는 구조다. Qlib Account 자체가 asset-class semantics, ETF constituent 또는 look-through exposure를
@@ -932,7 +1111,7 @@ Bond, futures와 다른 instrument는 future roadmap이다. 새로운 instrument
 trading unit, expiry, settlement와 cost behavior를 확장할 수 있어야 하지만 현재 stock/ETF requirement에
 미구현 상품의 lifecycle을 섞지 않는다.
 
-### 10.4 Flexible-budget financing
+### 10.5 Flexible-budget financing
 
 Unused flexible alpha budget을 unrelated active stock bet으로 전환하지 않는다. Enhanced index result는
 다음을 구분한다.
@@ -942,14 +1121,16 @@ Unused flexible alpha budget을 unrelated active stock bet으로 전환하지 �
 - Cash residual
 - Constraint 때문에 구현하지 못한 active exposure
 
-Fixed-budget counterfactual과 flexible-budget actual portfolio를 비교하고 selection effect, budget timing,
+Fixed-budget counterfactual과 flexible-budget simulated-realized portfolio를 비교하고 selection effect, budget timing,
 passive residual과 implementation effect를 구분할 수 있어야 한다.
 
 ## 11. Qlib execution and signed-alpha compatibility
 
-### 11.1 Qlib을 통한 realized execution
+### 11.1 Qlib을 통한 simulated-realized execution
 
-Physical target은 Qlib의 actual execution lifecycle을 통과한다.
+Physical target은 Qlib의 simulated execution lifecycle을 통과한다. 이 PRD에서 `realized`, `actual
+holding`과 `Qlib-confirmed feedback`은 requested target과 구분되는 backtest account의 confirmed state를
+뜻한다. Live exchange fill, broker account 또는 실제 fund holding을 뜻하지 않는다.
 
 - Weight target을 booksize, price와 lot rule에 맞는 quantity로 변환한다.
 - Stock과 ETF에 다른 cost를 적용할 수 있다.
@@ -988,9 +1169,9 @@ Initial funding은 active strategy booksize와 short capacity를 위한 baseline
 Qlib account는 `C`를 소유한다. Baseline record는 `B`와 matching cash를 추적한다. Independent signed
 execution ledger는 없다.
 
-### 11.4 Endowment와 actual SELL
+### 11.4 Endowment와 underlying SELL
 
-Negative intent를 Qlib에서 실제로 실행할 필요가 생기면:
+Negative intent를 Qlib backtest에서 simulated-realized position으로 표현할 필요가 생기면:
 
 1. Active pre-trade NAV, configured per-name short cap, safety multiplier, execution price와 lot size로 required
    baseline quantity를 정한다.
@@ -1001,15 +1182,15 @@ Negative intent를 Qlib에서 실제로 실행할 필요가 생기면:
    사용하지 않는다.
 5. Matching quantity와 cash change가 동시에 일어나 composite NAV와 active NAV가 변하지 않는다.
 6. Qlib에는 negative signed target이 아니라 `C_target = B + A_target`을 제출한다.
-7. Economic active short는 Qlib exchange를 통과하는 actual underlying `SELL`이다.
+7. Economic active short는 Qlib exchange model을 통과하는 underlying `SELL`이다.
 8. Partial fill 또는 blocked trade 이후 signed holding은 `A_realized = C_realized - B`로 복원한다.
 
-Baseline lifecycle은 dynamic universe와 actual fill을 따라야 한다.
+Baseline lifecycle은 dynamic universe와 Qlib-confirmed fill을 따라야 한다.
 
-- 새로운 short instrument에 필요한 baseline은 그 instrument가 실제로 필요해진 시점에 추가한다.
+- 새로운 short instrument에 필요한 baseline은 그 instrument가 Qlib backtest에서 필요해진 시점에 추가한다.
 - Universe에서 제외되어 cover target이 생겨도 BUY가 blocked되었다면 realized short가 남아 있으므로
   필요한 baseline을 유지한다.
-- Actual cover fill 이후에만 불필요한 baseline을 matching cash와 함께 NAV-neutral하게 release한다.
+- Qlib-confirmed cover fill 이후에만 불필요한 baseline을 matching cash와 함께 NAV-neutral하게 release한다.
 - `retained` policy는 re-entry를 위해 baseline을 계속 보유한다.
 - `active-short-only` policy는 열린 active short를 표현하는 데 필요한 baseline만 유지하여 reserve 누적을
   줄인다.
@@ -1017,7 +1198,7 @@ Baseline lifecycle은 dynamic universe와 actual fill을 따라야 한다.
 Funding reserve가 부족하거나 `C_target < 0`이면 명시적으로 실패한다.
 
 아직 observed되지 않은 ticker는 baseline과 composite position이 모두 0이다. Qlib dealt quantity가
-realized execution의 source이며 별도 signed fill ledger를 advance해서는 안 된다.
+simulated-realized execution의 source이며 별도 signed fill ledger를 advance해서는 안 된다.
 
 ### 11.5 Observable account와 performance
 
@@ -1159,6 +1340,23 @@ artifact store에 다시 등록하지 않는다. User가 저장을 요청한 최
 output이며 alpha, backtest 또는 ensemble lineage를 구성하는 artifact가 아니다. User와 agent는
 reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 있다.
 
+### 12.5 Research perspective와 decision brief
+
+같은 stored evidence에서 requested review perspective에 맞는 report composition을 만들 수 있다.
+
+- Quant-research perspective는 hypothesis, data, full comparison range, robustness와 failure boundary를
+  중심으로 구성한다.
+- Domain-analysis perspective는 economic mechanism, supporting/challenging evidence와 missing data를
+  중심으로 구성한다.
+- Independent-review perspective는 time leakage, unexplored comparison, exploratory selection과 unresolved
+  warning을 중심으로 구성한다.
+- Implementation-feasibility perspective는 intended-versus-simulated-realized difference, cost, capacity,
+  constraint residual과 unsupported assumption을 중심으로 구성한다.
+
+Perspective는 section selection과 explanation order를 바꿀 수 있지만 underlying metric, evidence
+conclusion 또는 artifact identity를 바꾸지 않는다. Implementation-feasibility brief는 external portfolio
+decision에 사용할 research input일 수 있지만 fund approval 또는 live instruction이 아니다.
+
 ## 13. Acceptance criteria
 
 ### P0 — Agent onboarding
@@ -1171,6 +1369,9 @@ reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 �
 - Generated instruction과 skill이 private source를 읽지 않고 public qlibx surface를 사용하도록 안내한다.
 - Generated skill이 현재 제공되는 extension point의 workflow 위치, required input/output, time boundary,
   validation과 minimal example을 포함하거나 version-matched installed documentation으로 정확히 연결한다.
+- Initial onboarding은 permanent user persona, fund mandate 또는 portfolio constraint를 요구하지 않는다.
+- Agent가 task-specific context만 점진적으로 확인하고 implementation-aware evaluation을 요청한 경우에만
+  benchmark, cost, capacity와 portfolio constraint를 요구한다.
 
 ### P1 — Human과 agent data journey
 
@@ -1187,6 +1388,8 @@ reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 �
 
 ### P2 — StrategyAgent와 no look-ahead
 
+- Documentation과 result가 investment-decision component인 StrategyAgent와 coding-agent research role을
+  명확히 구분한다.
 - 같은 bounded input, version, state와 seed는 같은 StrategyAgent result를 만든다.
 - Qlib closed-loop decision/feedback ordering을 보존한다.
 - Strategy instance는 class identity와 별도로 이름, ID, parameter, data requirement와 output contract를
@@ -1195,7 +1398,7 @@ reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 �
   수 있다.
 - Parent/wrapper가 child output을 composition하여 재사용하고 같은 signal logic을 반복 구현하지 않는다.
 - Child strategy는 parent의 allowed lookback 밖 또는 parent decision 이후 data에 접근할 수 없다.
-- Child evaluation과 ML/Bayesian what-if는 actual Qlib account를 변경하지 않는다.
+- Child evaluation과 ML/Bayesian what-if는 Qlib backtest account를 변경하지 않는다.
 - Resume와 uninterrupted run은 같은 observable result를 만든다.
 
 ### P3 — Signed alpha tool
@@ -1212,11 +1415,19 @@ reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 �
 - Successful, failed, invalid와 incomplete trial을 구분한다.
 - Proposal 전에 prior alpha, nearest neighbor와 searched range를 조회한다.
 - Orthogonality는 semantic, empirical과 incremental result를 제공한다.
+- Robustness study가 pre-declared와 exploratory comparison을 구분하고 모든 scenario result, 공통 evidence,
+  fragile condition과 failure boundary를 제공한다.
+- Run status, evidence conclusion과 research decision을 서로 다른 dimension으로 저장한다.
+- Optional collaborative role의 evidence, disagreement와 unresolved warning을 최종 synthesis 이후에도
+  조회할 수 있다.
 - 최소 세 agent가 worktree 없이 한 branch에서 independent session을 실행한다.
-- Config edit, crash, duplicate publication과 stale update는 section 9.7 behavior를 따른다.
+- Config edit, crash, duplicate publication과 stale update는 section 9.9 behavior를 따른다.
 
-### P5 — Ensemble과 enhanced index
+### P5 — Ensemble과 implementation-aware alpha evaluation
 
+- Alpha research와 robustness study는 benchmark 또는 fund mandate 없이 실행할 수 있다.
+- Optional portfolio evaluation context는 research assumption으로 기록되며 실제 fund mandate 또는 approval로
+  표시되지 않는다.
 - Stored alpha member를 strategy rerun 없이 ensemble한다.
 - Member weight를 ticker-level로 netting하면서 flexible exposure를 보존한다.
 - Signed active intent를 benchmark-relative long-only stock/ETF/cash target으로 변환한다.
@@ -1228,9 +1439,11 @@ reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 �
 
 ### P6 — Qlib signed execution
 
+- Qlib-confirmed fill, position과 account를 backtest의 simulated-realized state로 표시하고 live broker 또는
+  실제 fund state와 구분한다.
 - Result가 matched-capitalization을 Qlib long-only limitation을 위한 compatibility hack으로 표시한다.
 - Endowment activation은 NAV-neutral하다.
-- Active short는 actual underlying Qlib `SELL`로 실행된다.
+- Active short는 Qlib exchange model을 통과하는 underlying `SELL` order로 실행된다.
 - Composite position은 non-negative이고 `A = C - B`를 만족한다.
 - Partial fill은 Qlib dealt quantity를 통해서만 signed quantity를 변경한다.
 - Blocked cover 뒤에는 필요한 baseline을 유지하고 actual cover fill 뒤에만 release한다.
@@ -1249,6 +1462,8 @@ reporting을 거치지 않고 raw stored artifacts를 직접 분석할 수도 �
 - User가 built-in report 없이 raw Qlib backtest artifact를 사용할 수 있다.
 - Stored artifact에서 report를 만들 때 research를 다시 실행하지 않는다.
 - Analysis calculation과 visualization을 분리하고 여러 report section과 renderer를 조합할 수 있다.
+- Requested research perspective가 report composition을 바꾸더라도 underlying metric과 evidence identity는
+  바뀌지 않는다.
 - Reporting은 새로운 canonical research artifact를 만들지 않는다.
 
 ## 14. Working prototype reference
