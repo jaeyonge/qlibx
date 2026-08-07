@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "qlib_version": "0.9.8.dev32",
+  "calendar_count": 1965,
+  "calendar_start": "2018-01-02",
+  "calendar_end": "2026-01-05",
+  "feature_rows": 800,
+  "feature_columns": [
+    "$pbr",
+    "$adjusted_daily_return"
+  ],
+  "instruments": 200,
+  "finite_pbr": 800,
+  "finite_adjusted_daily_return": 800,
+  "sample_comparison": {
+    "instrument": "A000080",
+    "date": "2025-12-29",
+    "qlib_pbr": 1.1200000047683716,
+    "direct_pbr": 1.1200000047683716,
+    "qlib_adjusted_daily_return": -0.02375924028456211,
+    "direct_adjusted_daily_return": -0.02375924028456211
+  }
+}

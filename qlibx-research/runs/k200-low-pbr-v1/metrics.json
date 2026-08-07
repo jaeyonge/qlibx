@@ -1,0 +1,373 @@
+{
+  "comparisons": {
+    "confirmation": {
+      "low_minus_baseline": {
+        "average_monthly_return": -0.0010283433872634213,
+        "confidence_interval_95": [
+          -0.010152503731706217,
+          0.006129229251256162
+        ],
+        "months": 36,
+        "positive_month_percentage": 0.4444444444444444
+      },
+      "low_minus_high": {
+        "average_monthly_return": 0.0012864932039101415,
+        "confidence_interval_95": [
+          -0.016368771165202033,
+          0.01627681386278726
+        ],
+        "months": 36,
+        "positive_month_percentage": 0.4166666666666667
+      }
+    },
+    "discovery": {
+      "low_minus_baseline": {
+        "average_monthly_return": 0.0022590685254209155,
+        "confidence_interval_95": [
+          -0.003536746958693921,
+          0.008578181088779713
+        ],
+        "months": 58,
+        "positive_month_percentage": 0.5172413793103449
+      },
+      "low_minus_high": {
+        "average_monthly_return": 0.006464634743269896,
+        "confidence_interval_95": [
+          -0.005499253072323339,
+          0.02038646936518469
+        ],
+        "months": 58,
+        "positive_month_percentage": 0.5
+      }
+    }
+  },
+  "concentration": {
+    "high_pbr": {
+      "top_5_absolute_contribution_share": 0.14576077725189335,
+      "top_contributors": [
+        {
+          "instrument": "A267260",
+          "summed_monthly_contribution": 0.07103539041144648
+        },
+        {
+          "instrument": "A012450",
+          "summed_monthly_contribution": 0.06168909192740759
+        },
+        {
+          "instrument": "A003230",
+          "summed_monthly_contribution": 0.06162818603850078
+        },
+        {
+          "instrument": "A019170",
+          "summed_monthly_contribution": -0.056496247553263206
+        },
+        {
+          "instrument": "A042660",
+          "summed_monthly_contribution": 0.050713473035679225
+        },
+        {
+          "instrument": "A079550",
+          "summed_monthly_contribution": 0.048756385008522383
+        },
+        {
+          "instrument": "A003670",
+          "summed_monthly_contribution": 0.0478104770734635
+        },
+        {
+          "instrument": "A278470",
+          "summed_monthly_contribution": 0.04621005935823531
+        },
+        {
+          "instrument": "A005420",
+          "summed_monthly_contribution": -0.04330335314692999
+        },
+        {
+          "instrument": "A377300",
+          "summed_monthly_contribution": -0.03899901416731817
+        }
+      ]
+    },
+    "low_pbr": {
+      "top_5_absolute_contribution_share": 0.1719755186294633,
+      "top_contributors": [
+        {
+          "instrument": "A011210",
+          "summed_monthly_contribution": 0.054117271356351
+        },
+        {
+          "instrument": "A001230",
+          "summed_monthly_contribution": 0.04055617534103868
+        },
+        {
+          "instrument": "A000150",
+          "summed_monthly_contribution": 0.04007477087211519
+        },
+        {
+          "instrument": "A001120",
+          "summed_monthly_contribution": 0.03884495716631509
+        },
+        {
+          "instrument": "A000240",
+          "summed_monthly_contribution": 0.0350391309987418
+        },
+        {
+          "instrument": "A004490",
+          "summed_monthly_contribution": 0.0335037415528704
+        },
+        {
+          "instrument": "A006260",
+          "summed_monthly_contribution": 0.028942646824976066
+        },
+        {
+          "instrument": "A006650",
+          "summed_monthly_contribution": 0.024435543981009073
+        },
+        {
+          "instrument": "A097230",
+          "summed_monthly_contribution": -0.024318623259450146
+        },
+        {
+          "instrument": "A000670",
+          "summed_monthly_contribution": 0.023205745962160206
+        }
+      ]
+    }
+  },
+  "exposures": {
+    "confirmation": {
+      "high_pbr": {
+        "log_market_cap": {
+          "mean_active": 0.3634262961253685,
+          "months": 36
+        },
+        "market_beta": 1.120134995915962,
+        "momentum": {
+          "mean_active": 0.2551707675146571,
+          "months": 36
+        },
+        "sector": {
+          "maximum_single_sector_active_weight": 0.21,
+          "mean_active_weight_distance": 0.26434582165301995,
+          "months": 36
+        }
+      },
+      "low_pbr": {
+        "log_market_cap": {
+          "mean_active": -0.5890016783390232,
+          "months": 36
+        },
+        "market_beta": 0.9586191253743629,
+        "momentum": {
+          "mean_active": -0.14326854738485464,
+          "months": 36
+        },
+        "sector": {
+          "maximum_single_sector_active_weight": 0.19713954387321228,
+          "mean_active_weight_distance": 0.22753112617879548,
+          "months": 36
+        }
+      }
+    },
+    "discovery": {
+      "high_pbr": {
+        "log_market_cap": {
+          "mean_active": 0.322966875754927,
+          "months": 59
+        },
+        "market_beta": 0.9491960323331,
+        "momentum": {
+          "mean_active": 0.20906207003700716,
+          "months": 47
+        },
+        "sector": {
+          "maximum_single_sector_active_weight": 0.3193473193473194,
+          "mean_active_weight_distance": 0.3141646703497961,
+          "months": 35
+        }
+      },
+      "low_pbr": {
+        "log_market_cap": {
+          "mean_active": -0.3572050227139323,
+          "months": 59
+        },
+        "market_beta": 1.0474673791663147,
+        "momentum": {
+          "mean_active": -0.13976245290402073,
+          "months": 47
+        },
+        "sector": {
+          "maximum_single_sector_active_weight": 0.2671376242804815,
+          "mean_active_weight_distance": 0.27765859644292623,
+          "months": 35
+        }
+      }
+    }
+  },
+  "portfolios": {
+    "confirmation": {
+      "baseline": {
+        "annualized_return": 0.18498589412788102,
+        "annualized_volatility": 0.17883507148315728,
+        "average_one_way_turnover": 0.043882167582237175,
+        "maximum_drawdown": -0.15328576567818608,
+        "months": 36,
+        "positive_month_percentage": 0.5555555555555556,
+        "valid_months": 36,
+        "year_returns": {
+          "2023": 0.1486628226874831,
+          "2024": -0.043871457068443975,
+          "2025": 0.4897653812527485
+        }
+      },
+      "high_pbr": {
+        "annualized_return": 0.12853478808850172,
+        "annualized_volatility": 0.2316122692601336,
+        "average_one_way_turnover": 0.11875378990409345,
+        "maximum_drawdown": -0.29002033410548167,
+        "months": 36,
+        "positive_month_percentage": 0.5833333333333334,
+        "valid_months": 36,
+        "year_returns": {
+          "2023": 0.06986745897004254,
+          "2024": -0.18678557374910654,
+          "2025": 0.6323000136288011
+        }
+      },
+      "low_pbr": {
+        "annualized_return": 0.17061447042648115,
+        "annualized_volatility": 0.19361229041056927,
+        "average_one_way_turnover": 0.10324871722623646,
+        "maximum_drawdown": -0.16751616502256617,
+        "months": 36,
+        "positive_month_percentage": 0.5555555555555556,
+        "valid_months": 36,
+        "year_returns": {
+          "2023": 0.15604441315106898,
+          "2024": -0.07488319527530174,
+          "2025": 0.4766701079529929
+        }
+      }
+    },
+    "discovery": {
+      "baseline": {
+        "annualized_return": -0.04551809758348058,
+        "annualized_volatility": 0.20627058502056853,
+        "average_one_way_turnover": 0.03965283689541053,
+        "maximum_drawdown": -0.5547101719474462,
+        "months": 59,
+        "positive_month_percentage": 0.5344827586206896,
+        "valid_months": 58,
+        "year_returns": {
+          "2018": -0.19544601088263525,
+          "2019": -0.0676574178546967,
+          "2020": 0.21669424151644034,
+          "2021": 0.07901684325730574,
+          "2022": -0.18552581141919244
+        }
+      },
+      "high_pbr": {
+        "annualized_return": -0.08866837419589857,
+        "annualized_volatility": 0.22053014073083652,
+        "average_one_way_turnover": 0.1012067054676063,
+        "maximum_drawdown": -0.49992989605536153,
+        "months": 59,
+        "positive_month_percentage": 0.4745762711864407,
+        "valid_months": 59,
+        "year_returns": {
+          "2018": -0.2243037674327668,
+          "2019": -0.06055750705243301,
+          "2020": 0.34631558948935237,
+          "2021": -0.09217357412486205,
+          "2022": -0.281095276137983
+        }
+      },
+      "low_pbr": {
+        "annualized_return": -0.02585595491773962,
+        "annualized_volatility": 0.2286103800256211,
+        "average_one_way_turnover": 0.10427465249428483,
+        "maximum_drawdown": -0.6292785942401393,
+        "months": 59,
+        "positive_month_percentage": 0.5344827586206896,
+        "valid_months": 58,
+        "year_returns": {
+          "2018": -0.19259780647923952,
+          "2019": -0.128110003799759,
+          "2020": 0.1477137889346274,
+          "2021": 0.22866813996425983,
+          "2022": -0.11014166307331474
+        }
+      }
+    }
+  },
+  "regimes": {
+    "confirmation": {
+      "market_direction": {
+        "falling": {
+          "low_minus_baseline_mean": 0.012833797364131948,
+          "low_minus_high_mean": 0.04023753584584301,
+          "months": 16,
+          "valid_low_minus_baseline_months": 16,
+          "valid_low_minus_high_months": 16
+        },
+        "rising": {
+          "low_minus_baseline_mean": -0.012118055988379717,
+          "low_minus_high_mean": -0.029874340909636154,
+          "months": 20,
+          "valid_low_minus_baseline_months": 20,
+          "valid_low_minus_high_months": 20
+        }
+      },
+      "volatility_regime": {
+        "high": {
+          "low_minus_baseline_mean": 0.0045473258863313396,
+          "low_minus_high_mean": 0.011326428855038921,
+          "months": 16,
+          "valid_low_minus_baseline_months": 16,
+          "valid_low_minus_high_months": 16
+        },
+        "low": {
+          "low_minus_baseline_mean": -0.00548887880613923,
+          "low_minus_high_mean": -0.0067454553169928825,
+          "months": 20,
+          "valid_low_minus_baseline_months": 20,
+          "valid_low_minus_high_months": 20
+        }
+      }
+    },
+    "discovery": {
+      "market_direction": {
+        "falling": {
+          "low_minus_baseline_mean": -0.0033690512289030338,
+          "low_minus_high_mean": -0.006442465410219274,
+          "months": 28,
+          "valid_low_minus_baseline_months": 27,
+          "valid_low_minus_high_months": 27
+        },
+        "rising": {
+          "low_minus_baseline_mean": 0.007160979279186936,
+          "low_minus_high_mean": 0.017706302618889495,
+          "months": 31,
+          "valid_low_minus_baseline_months": 31,
+          "valid_low_minus_high_months": 31
+        }
+      },
+      "volatility_regime": {
+        "high": {
+          "low_minus_baseline_mean": -0.0027023361109035932,
+          "low_minus_high_mean": -0.0017596514153347283,
+          "months": 29,
+          "valid_low_minus_baseline_months": 29,
+          "valid_low_minus_high_months": 29
+        },
+        "low": {
+          "low_minus_baseline_mean": 0.007220473161745425,
+          "low_minus_high_mean": 0.014688920901874519,
+          "months": 30,
+          "valid_low_minus_baseline_months": 29,
+          "valid_low_minus_high_months": 29
+        }
+      }
+    }
+  },
+  "volatility_threshold": 0.16825544943216642
+}

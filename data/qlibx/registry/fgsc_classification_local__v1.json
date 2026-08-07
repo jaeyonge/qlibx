@@ -1,0 +1,40 @@
+{
+  "accepted_limitations": [
+    "FGSC classifications begin in 2020 and the supplied data has no label codebook."
+  ],
+  "canonical_mapping": {
+    "date": "일자",
+    "instrument": "종목약코드",
+    "sector_code": "FGSC지수코드"
+  },
+  "dataset_id": "fgsc_classification_local/v1",
+  "date_field": "date",
+  "date_format": "%Y%m%d",
+  "key": [
+    "date",
+    "instrument"
+  ],
+  "kind": "point_in_time_classification",
+  "mapping_confirmed": true,
+  "producer": {
+    "id": "qlibx.dataset_registration/v1",
+    "implementation_sha256": "0113afed16d014bc4b76ffa34c96000b6fffcf2f04a86c1354d629e85be0f8e2"
+  },
+  "profile": {
+    "duplicate_key_groups": 0,
+    "maximum_date": "20260429",
+    "minimum_date": "20200102",
+    "required_field_nulls": 0,
+    "rows": 3507557
+  },
+  "registered_at": "2026-08-07T16:12:45.901711Z",
+  "registration_id": "cbba2ac9faf1cfbc851dc62557d07170895ea4c12910bbeaaae6a4e5e1b68a9c",
+  "schema": "qlibx.dataset_registration/v1",
+  "source": {
+    "path": "DW/DW_FNG_FGSC종목_20200101-20260430.csv",
+    "sha256": "7f335d0918032eb00ab737698d4fd5c8f9f9b0d11b994b970cf698b3482cbbea",
+    "size": 253644321,
+    "table": null,
+    "type": "csv"
+  }
+}

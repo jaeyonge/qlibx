@@ -1,0 +1,72 @@
+{
+  "schema": "qlibx.qlib_materialization/v1",
+  "profile_id": "qlib.research_daily/v1",
+  "output_dir": "data/qlibx/qlib/research_daily_v1",
+  "start_date": "2018-01-02",
+  "end_date": "2026-01-05",
+  "calendar": {
+    "source": {
+      "dataset_id": "krx_calendar_local/v1",
+      "type": "csv",
+      "path": "DW/dw_fng_mirror/dw_fng_calendar.csv"
+    },
+    "date_column": "일자",
+    "date_format": "%Y%m%d",
+    "include": {
+      "column": "주식개장구분",
+      "values": ["0"]
+    }
+  },
+  "universes": [
+    {
+      "name": "k200",
+      "source": {
+        "dataset_id": "k200_membership_local/v1",
+        "type": "csv",
+        "path": "DW/fng_k200_members.csv"
+      },
+      "instrument_column": "종목코드2",
+      "date_column": "일자",
+      "date_format": "%Y%m%d"
+    }
+  ],
+  "features": [
+    {
+      "name": "pbr",
+      "source": {
+        "dataset_id": "dataguide_daily_valuation_local/v1",
+        "type": "parquet",
+        "path": "DW/dw_fng_mirror/dw_fng_valuation.parquet"
+      },
+      "instrument_column": "종목약코드",
+      "date_column": "일자",
+      "date_format": "%Y%m%d",
+      "transform": {
+        "kind": "field",
+        "column": "PBR"
+      }
+    },
+    {
+      "name": "adjusted_daily_return",
+      "source": {
+        "dataset_id": "dataguide_daily_prices_local/v1",
+        "type": "csv",
+        "path": "DW/fng_stock_daily_prices.csv"
+      },
+      "instrument_column": "종목약코드",
+      "date_column": "거래일자",
+      "date_format": "%Y%m%d",
+      "transform": {
+        "kind": "ratio_minus_one",
+        "numerator": "종가",
+        "denominator": "기준가",
+        "require_positive_inputs": true
+      }
+    }
+  ],
+  "accepted_limitations": [
+    "Historical P/B revision and point-in-time provenance are not documented.",
+    "The exact corporate-action coverage of 수정계수 and 기준가 is not documented.",
+    "The research profile is not valid for Qlib order execution."
+  ]
+}

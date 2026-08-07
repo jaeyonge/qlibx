@@ -1,0 +1,40 @@
+{
+  "accepted_limitations": [
+    "The A-prefixed security identifier namespace has no supplied formal crosswalk."
+  ],
+  "canonical_mapping": {
+    "date": "일자",
+    "instrument": "종목코드2",
+    "market_cap": "상장시가총액"
+  },
+  "dataset_id": "k200_membership_local/v1",
+  "date_field": "date",
+  "date_format": "%Y%m%d",
+  "key": [
+    "date",
+    "instrument"
+  ],
+  "kind": "point_in_time_universe",
+  "mapping_confirmed": true,
+  "producer": {
+    "id": "qlibx.dataset_registration/v1",
+    "implementation_sha256": "0113afed16d014bc4b76ffa34c96000b6fffcf2f04a86c1354d629e85be0f8e2"
+  },
+  "profile": {
+    "duplicate_key_groups": 0,
+    "maximum_date": "20260720",
+    "minimum_date": "20170524",
+    "required_field_nulls": 0,
+    "rows": 449429
+  },
+  "registered_at": "2026-08-07T16:12:37.020133Z",
+  "registration_id": "45091842e22e133ee915f296d702287df96128aabe4f92fd93f7c51a3a1d94ad",
+  "schema": "qlibx.dataset_registration/v1",
+  "source": {
+    "path": "DW/fng_k200_members.csv",
+    "sha256": "e355f8405843d72786f10ba94c21ffca4c165e08ac918076fc3c5c9362a42b66",
+    "size": 105911848,
+    "table": null,
+    "type": "csv"
+  }
+}

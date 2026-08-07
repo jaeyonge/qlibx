@@ -1,0 +1,43 @@
+{
+  "accepted_limitations": [
+    "The exact corporate-action and dividend coverage of 기준가 and 수정계수 is not documented."
+  ],
+  "canonical_mapping": {
+    "adjustment_factor": "수정계수",
+    "close": "종가",
+    "date": "거래일자",
+    "instrument": "종목약코드",
+    "previous_close": "전일종가",
+    "reference_price": "기준가"
+  },
+  "dataset_id": "dataguide_daily_prices_local/v1",
+  "date_field": "date",
+  "date_format": "%Y%m%d",
+  "key": [
+    "date",
+    "instrument"
+  ],
+  "kind": "daily_prices",
+  "mapping_confirmed": true,
+  "producer": {
+    "id": "qlibx.dataset_registration/v1",
+    "implementation_sha256": "0113afed16d014bc4b76ffa34c96000b6fffcf2f04a86c1354d629e85be0f8e2"
+  },
+  "profile": {
+    "duplicate_key_groups": 0,
+    "maximum_date": "20260720",
+    "minimum_date": "20150102",
+    "required_field_nulls": 17,
+    "rows": 8709828
+  },
+  "registered_at": "2026-08-07T16:12:44.260389Z",
+  "registration_id": "d0e493b5fd4ec36c21d3de5d0c8498948f20b841247c98dbe0cce70fce81783f",
+  "schema": "qlibx.dataset_registration/v1",
+  "source": {
+    "path": "DW/fng_stock_daily_prices.csv",
+    "sha256": "adbe829441a1c0594c52a7928a5ac8ffcedf9bc3fbf8c3f0eda088887b0deb3b",
+    "size": 754992235,
+    "table": null,
+    "type": "csv"
+  }
+}

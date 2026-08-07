@@ -1,0 +1,36 @@
+{
+  "accepted_limitations": [],
+  "canonical_mapping": {
+    "date": "일자",
+    "is_open": "주식개장구분"
+  },
+  "dataset_id": "krx_calendar_local/v1",
+  "date_field": "date",
+  "date_format": "%Y%m%d",
+  "key": [
+    "date"
+  ],
+  "kind": "trading_calendar",
+  "mapping_confirmed": true,
+  "producer": {
+    "id": "qlibx.dataset_registration/v1",
+    "implementation_sha256": "0113afed16d014bc4b76ffa34c96000b6fffcf2f04a86c1354d629e85be0f8e2"
+  },
+  "profile": {
+    "duplicate_key_groups": 0,
+    "maximum_date": "20260630",
+    "minimum_date": "20180101",
+    "required_field_nulls": 0,
+    "rows": 3103
+  },
+  "registered_at": "2026-08-07T16:12:36.332703Z",
+  "registration_id": "3ffb66499234514cbc85e0cec0743eea855c62f1fab34ba8507f4989fc5cc264",
+  "schema": "qlibx.dataset_registration/v1",
+  "source": {
+    "path": "DW/dw_fng_mirror/dw_fng_calendar.csv",
+    "sha256": "10e84df4681eb271103ca92441b0b3b45eb465c6743df2626af6c7673b0b3419",
+    "size": 183230,
+    "table": null,
+    "type": "csv"
+  }
+}

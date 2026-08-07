@@ -1,0 +1,70 @@
+{
+  "accepted_limitations": [
+    "Historical P/B revision and point-in-time provenance are not documented.",
+    "The exact corporate-action and dividend coverage of 기준가 and 수정계수 is not documented.",
+    "FGSC classifications begin in 2020 and have no supplied label codebook.",
+    "Results are gross of commissions, taxes, bid-ask spreads, and market impact.",
+    "The study is research-only and is not evidence of real-world investability."
+  ],
+  "artifact_sha256": {
+    "daily-portfolio-returns.csv": "bff5c3745b1009ba30d89bdd2ef69b9115b1f3e5466f1dae40fcfe57f010c0a0",
+    "decision.json": "c756c218ad5cef3dced691e9937ba30c199d6ab02e9fc8e320a6401a8fd69967",
+    "eligibility-audit.json": "9640c49b04ffe6287775476fa137bb66ca8b3840fc49f59566e213b3fd9e3792",
+    "evidence-report.md": "75a91e4440043a1aa0de7f0085a347d851c2e5995402a1ca338b200e657a66b4",
+    "metrics.json": "501c36cd3309bc60228daff8784a2525bc6b82e1512401d36109bc63e1c56db3",
+    "monthly-results.csv": "e7315db9b8d1d87c43a699fefebb970d3a405a25224cf3270668b0e04aa8bcbf",
+    "portfolio-holdings.csv": "14b53f81c5d8e55fe9288a3bc962d5b819184a1cb7096c2a851c221fafff37c0",
+    "security-contributions.csv": "ad1ffb2963e6f0f4659f46596eae3de2477cb4494ea3c50c4b56288ad1dd4fe7"
+  },
+  "config_sha256": "c8a8a47ae83a72205d3d08e5e196fc4a042f0ac9786f8b30ef553eef7cbc3f9d",
+  "created_at": "2026-08-07T16:13:04.890991Z",
+  "decision": {
+    "classification": "invalid",
+    "execution_completed": true,
+    "gross_research_only": true,
+    "rationale": "Selected holding returns are unresolved for A000030; without a registered successor/corporate-action mapping, the preregistered test is unreliable.",
+    "schema": "qlibx.research_decision/v1",
+    "study_id": "k200-low-pbr/v1"
+  },
+  "materialization_id": "c828c0776b431bdf837c67c91683dafaa9eb69417e87d003e2fe7cc5cc588918",
+  "producer": {
+    "id": "qlibx.monthly_cross_sectional_research/v1",
+    "implementation_sha256": "19417aa1d5166a7887feb8a4c09c7d7cb7f506098128073fe4361131e704d1d7",
+    "package_version": "0.1.0"
+  },
+  "provider_validation": {
+    "calendar_dates": 1965,
+    "features": {
+      "adjusted_daily_return": {
+        "instruments": 5153,
+        "invalid_binaries": 0
+      },
+      "pbr": {
+        "instruments": 4175,
+        "invalid_binaries": 0
+      }
+    },
+    "qlib_public_api_smoke": "not_run",
+    "status": "passed",
+    "universes": {
+      "all": {
+        "instruments": 5153,
+        "intervals": 5153
+      },
+      "k200": {
+        "instruments": 294,
+        "intervals": 304
+      }
+    }
+  },
+  "registration_ids": {
+    "dataguide_daily_prices_local/v1": "d0e493b5fd4ec36c21d3de5d0c8498948f20b841247c98dbe0cce70fce81783f",
+    "dataguide_daily_valuation_local/v1": "751702da7bcdf695dc72110b0817d44c1128fdb7a84ee49006c39f963d5333c2",
+    "fgsc_classification_local/v1": "cbba2ac9faf1cfbc851dc62557d07170895ea4c12910bbeaaae6a4e5e1b68a9c",
+    "k200_membership_local/v1": "45091842e22e133ee915f296d702287df96128aabe4f92fd93f7c51a3a1d94ad",
+    "krx_calendar_local/v1": "3ffb66499234514cbc85e0cec0743eea855c62f1fab34ba8507f4989fc5cc264"
+  },
+  "run_id": "cfd6578fac72ec9051c83df0b9133ac9db44fab53fde5d81f17ce0a2eccb09b0",
+  "schema": "qlibx.research_run/v1",
+  "study_id": "k200-low-pbr/v1"
+}

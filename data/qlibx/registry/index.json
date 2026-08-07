@@ -1,0 +1,31 @@
+{
+  "datasets": [
+    {
+      "dataset_id": "dataguide_daily_prices_local/v1",
+      "path": "dataguide_daily_prices_local__v1.json",
+      "registration_id": "d0e493b5fd4ec36c21d3de5d0c8498948f20b841247c98dbe0cce70fce81783f"
+    },
+    {
+      "dataset_id": "dataguide_daily_valuation_local/v1",
+      "path": "dataguide_daily_valuation_local__v1.json",
+      "registration_id": "751702da7bcdf695dc72110b0817d44c1128fdb7a84ee49006c39f963d5333c2"
+    },
+    {
+      "dataset_id": "fgsc_classification_local/v1",
+      "path": "fgsc_classification_local__v1.json",
+      "registration_id": "cbba2ac9faf1cfbc851dc62557d07170895ea4c12910bbeaaae6a4e5e1b68a9c"
+    },
+    {
+      "dataset_id": "k200_membership_local/v1",
+      "path": "k200_membership_local__v1.json",
+      "registration_id": "45091842e22e133ee915f296d702287df96128aabe4f92fd93f7c51a3a1d94ad"
+    },
+    {
+      "dataset_id": "krx_calendar_local/v1",
+      "path": "krx_calendar_local__v1.json",
+      "registration_id": "3ffb66499234514cbc85e0cec0743eea855c62f1fab34ba8507f4989fc5cc264"
+    }
+  ],
+  "schema": "qlibx.dataset_registry/v1",
+  "updated_at": "2026-08-07T16:12:45.903817Z"
+}

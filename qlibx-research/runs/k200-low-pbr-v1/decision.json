@@ -1,0 +1,8 @@
+{
+  "classification": "invalid",
+  "execution_completed": true,
+  "gross_research_only": true,
+  "rationale": "Selected holding returns are unresolved for A000030; without a registered successor/corporate-action mapping, the preregistered test is unreliable.",
+  "schema": "qlibx.research_decision/v1",
+  "study_id": "k200-low-pbr/v1"
+}

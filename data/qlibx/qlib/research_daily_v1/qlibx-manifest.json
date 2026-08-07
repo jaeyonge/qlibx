@@ -1,0 +1,194 @@
+{
+  "accepted_limitations": [
+    "Historical P/B revision and point-in-time provenance are not documented.",
+    "The exact corporate-action coverage of 수정계수 and 기준가 is not documented.",
+    "The research profile is not valid for Qlib order execution."
+  ],
+  "calendar": {
+    "count": 1965,
+    "dataset_id": "krx_calendar_local/v1",
+    "end": "2026-01-05",
+    "excluded_rows": 961,
+    "start": "2018-01-02"
+  },
+  "capabilities": [
+    "calendar",
+    "dynamic_instruments",
+    "feature_retrieval",
+    "eligibility_audit",
+    "signal_analysis"
+  ],
+  "config_sha256": "3ae81bb4750368d6b35aeebc5403e0a36de696f2bc132766d5f4179ade3f492e",
+  "created_at": "2026-08-07T16:08:23.250412Z",
+  "excluded_capabilities": [
+    "order_execution",
+    "trade_unit_rounding",
+    "price_limit_simulation",
+    "volume_capacity",
+    "transaction_costs"
+  ],
+  "features": [
+    {
+      "dataset_id": "dataguide_daily_valuation_local/v1",
+      "instruments": 4175,
+      "missing_values": 0,
+      "name": "pbr",
+      "outside_configured_bounds": 490180,
+      "rows": 5450933,
+      "storage_dtype": "float32",
+      "transform": {
+        "column": "PBR",
+        "denominator": null,
+        "kind": "field",
+        "numerator": null,
+        "require_positive_inputs": false
+      },
+      "valid_values": 5450933
+    },
+    {
+      "dataset_id": "dataguide_daily_prices_local/v1",
+      "instruments": 5153,
+      "missing_values": 510,
+      "name": "adjusted_daily_return",
+      "outside_configured_bounds": 2323980,
+      "rows": 6385848,
+      "storage_dtype": "float32",
+      "transform": {
+        "column": null,
+        "denominator": "기준가",
+        "kind": "ratio_minus_one",
+        "numerator": "종가",
+        "require_positive_inputs": true
+      },
+      "valid_values": 6385338
+    }
+  ],
+  "materialization_id": "c828c0776b431bdf837c67c91683dafaa9eb69417e87d003e2fe7cc5cc588918",
+  "output_dir": "data/qlibx/qlib/research_daily_v1",
+  "producer": {
+    "id": "qlibx.qlib_binary_materializer",
+    "implementation_sha256": "4d0fe393b35dc48afe1674ea3b054ae32669f7903b595bdcece39a5ee3afb1dd",
+    "package_version": "0.1.0",
+    "schema_version": 1
+  },
+  "profile": {
+    "capabilities": [
+      "calendar",
+      "dynamic_instruments",
+      "feature_retrieval",
+      "eligibility_audit",
+      "signal_analysis"
+    ],
+    "description": "Research-only daily Qlib dataset. It exposes point-in-time universe membership, P/B, and an empirically supported adjusted daily return. It intentionally does not publish Qlib execution price or factor fields.",
+    "excluded_capabilities": [
+      "order_execution",
+      "trade_unit_rounding",
+      "price_limit_simulation",
+      "volume_capacity",
+      "transaction_costs"
+    ],
+    "features": [
+      {
+        "allowed_transforms": [
+          "field"
+        ],
+        "dtype": "float32",
+        "missing_policy": "preserve",
+        "name": "pbr",
+        "semantic": "observed price-to-book ratio"
+      },
+      {
+        "allowed_transforms": [
+          "ratio_minus_one"
+        ],
+        "dtype": "float32",
+        "missing_policy": "preserve",
+        "name": "adjusted_daily_return",
+        "semantic": "corporate-action-adjusted daily return"
+      }
+    ],
+    "frequency": "day",
+    "profile_id": "qlib.research_daily/v1",
+    "required_universes": [
+      "k200"
+    ],
+    "schema_version": 1,
+    "timezone": "Asia/Seoul"
+  },
+  "schema": "qlibx.qlib_materialization_manifest/v1",
+  "sources": [
+    {
+      "dataset_id": "krx_calendar_local/v1",
+      "path": "DW/dw_fng_mirror/dw_fng_calendar.csv",
+      "sha256": "10e84df4681eb271103ca92441b0b3b45eb465c6743df2626af6c7673b0b3419",
+      "size": 183230,
+      "table": null,
+      "type": "csv"
+    },
+    {
+      "dataset_id": "dataguide_daily_valuation_local/v1",
+      "path": "DW/dw_fng_mirror/dw_fng_valuation.parquet",
+      "sha256": "82b806844d102015790e3bb71713cd6a30e9c3e7d6099c1cea8284f932509e6b",
+      "size": 77078832,
+      "table": null,
+      "type": "parquet"
+    },
+    {
+      "dataset_id": "k200_membership_local/v1",
+      "path": "DW/fng_k200_members.csv",
+      "sha256": "e355f8405843d72786f10ba94c21ffca4c165e08ac918076fc3c5c9362a42b66",
+      "size": 105911848,
+      "table": null,
+      "type": "csv"
+    },
+    {
+      "dataset_id": "dataguide_daily_prices_local/v1",
+      "path": "DW/fng_stock_daily_prices.csv",
+      "sha256": "adbe829441a1c0594c52a7928a5ac8ffcedf9bc3fbf8c3f0eda088887b0deb3b",
+      "size": 754992235,
+      "table": null,
+      "type": "csv"
+    }
+  ],
+  "universes": [
+    {
+      "basis": "feature_union",
+      "instruments": 5153,
+      "intervals": 5153,
+      "name": "all"
+    },
+    {
+      "dataset_id": "k200_membership_local/v1",
+      "instruments": 294,
+      "intervals": 304,
+      "member_dates": 393577,
+      "name": "k200",
+      "outside_configured_bounds": 55852
+    }
+  ],
+  "validation": {
+    "calendar_dates": 1965,
+    "features": {
+      "adjusted_daily_return": {
+        "instruments": 5153,
+        "invalid_binaries": 0
+      },
+      "pbr": {
+        "instruments": 4175,
+        "invalid_binaries": 0
+      }
+    },
+    "qlib_public_api_smoke": "not_run",
+    "status": "passed",
+    "universes": {
+      "all": {
+        "instruments": 5153,
+        "intervals": 5153
+      },
+      "k200": {
+        "instruments": 294,
+        "intervals": 304
+      }
+    }
+  }
+}

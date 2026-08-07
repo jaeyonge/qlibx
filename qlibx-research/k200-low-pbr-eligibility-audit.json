@@ -1,0 +1,3217 @@
+{
+  "accepted_limitations": [
+    "Historical P/B revision and point-in-time provenance are not documented.",
+    "The exact corporate-action and dividend coverage of 기준가 and 수정계수 is not documented.",
+    "FGSC classifications begin in 2020 and have no supplied label codebook.",
+    "Results are gross of commissions, taxes, bid-ask spreads, and market impact.",
+    "The study is research-only and is not evidence of real-world investability."
+  ],
+  "calendar": {
+    "dates": 1965,
+    "end": "2026-01-05",
+    "start": "2018-01-02"
+  },
+  "corporate_action_diagnostics": {
+    "absolute_returns_above_threshold": 16,
+    "adjustment_factor_events": 138,
+    "extreme_return_threshold": 0.3,
+    "invalid_positive_inputs": 0,
+    "maximum_absolute_adjusted_return": 0.30000000000000004,
+    "member_price_rows": 393176,
+    "return_formula_mismatches": 0
+  },
+  "failures": [
+    {
+      "cases": [
+        {
+          "holding_month": "2019-02",
+          "instrument": "A000030",
+          "missing_dates": [
+            "2019-02-13",
+            "2019-02-14",
+            "2019-02-15",
+            "2019-02-18",
+            "2019-02-19",
+            "2019-02-20",
+            "2019-02-21",
+            "2019-02-22",
+            "2019-02-25",
+            "2019-02-26",
+            "2019-02-27",
+            "2019-02-28",
+            "2019-03-04"
+          ],
+          "portfolio": "low_pbr"
+        },
+        {
+          "holding_month": "2019-02",
+          "instrument": "A000030",
+          "missing_dates": [
+            "2019-02-13",
+            "2019-02-14",
+            "2019-02-15",
+            "2019-02-18",
+            "2019-02-19",
+            "2019-02-20",
+            "2019-02-21",
+            "2019-02-22",
+            "2019-02-25",
+            "2019-02-26",
+            "2019-02-27",
+            "2019-02-28",
+            "2019-03-04"
+          ],
+          "portfolio": "baseline"
+        }
+      ],
+      "code": "missing_selected_holding_returns",
+      "security_months": 2
+    }
+  ],
+  "holding_missing_cases": [
+    {
+      "holding_month": "2019-02",
+      "instrument": "A000030",
+      "missing_dates": [
+        "2019-02-13",
+        "2019-02-14",
+        "2019-02-15",
+        "2019-02-18",
+        "2019-02-19",
+        "2019-02-20",
+        "2019-02-21",
+        "2019-02-22",
+        "2019-02-25",
+        "2019-02-26",
+        "2019-02-27",
+        "2019-02-28",
+        "2019-03-04"
+      ],
+      "portfolio": "low_pbr"
+    },
+    {
+      "holding_month": "2019-02",
+      "instrument": "A000030",
+      "missing_dates": [
+        "2019-02-13",
+        "2019-02-14",
+        "2019-02-15",
+        "2019-02-18",
+        "2019-02-19",
+        "2019-02-20",
+        "2019-02-21",
+        "2019-02-22",
+        "2019-02-25",
+        "2019-02-26",
+        "2019-02-27",
+        "2019-02-28",
+        "2019-03-04"
+      ],
+      "portfolio": "baseline"
+    }
+  ],
+  "months": [
+    {
+      "eligible": 198,
+      "entry_date": "2018-02-01",
+      "exit_date": "2018-03-02",
+      "holding_month": "2018-02",
+      "members": 201,
+      "observation_date": "2018-01-31",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 198
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 198,
+      "entry_date": "2018-03-02",
+      "exit_date": "2018-04-02",
+      "holding_month": "2018-03",
+      "members": 201,
+      "observation_date": "2018-02-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 3,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 198
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 201,
+      "entry_date": "2018-04-02",
+      "exit_date": "2018-05-02",
+      "holding_month": "2018-04",
+      "members": 201,
+      "observation_date": "2018-03-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 201
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 201,
+      "entry_date": "2018-05-02",
+      "exit_date": "2018-06-01",
+      "holding_month": "2018-05",
+      "members": 201,
+      "observation_date": "2018-04-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 201
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 201,
+      "entry_date": "2018-06-01",
+      "exit_date": "2018-07-02",
+      "holding_month": "2018-06",
+      "members": 201,
+      "observation_date": "2018-05-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 201
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2018-07-02",
+      "exit_date": "2018-08-01",
+      "holding_month": "2018-07",
+      "members": 201,
+      "observation_date": "2018-06-29",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2018-08-01",
+      "exit_date": "2018-09-03",
+      "holding_month": "2018-08",
+      "members": 202,
+      "observation_date": "2018-07-31",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 202,
+      "entry_date": "2018-09-03",
+      "exit_date": "2018-10-01",
+      "holding_month": "2018-09",
+      "members": 202,
+      "observation_date": "2018-08-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 202
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 202,
+      "entry_date": "2018-10-01",
+      "exit_date": "2018-11-01",
+      "holding_month": "2018-10",
+      "members": 202,
+      "observation_date": "2018-09-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 202
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 202,
+      "entry_date": "2018-11-01",
+      "exit_date": "2018-12-03",
+      "holding_month": "2018-11",
+      "members": 202,
+      "observation_date": "2018-10-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 202
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 202,
+      "entry_date": "2018-12-03",
+      "exit_date": "2019-01-02",
+      "holding_month": "2018-12",
+      "members": 202,
+      "observation_date": "2018-11-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 202
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 201,
+      "entry_date": "2019-01-02",
+      "exit_date": "2019-02-01",
+      "holding_month": "2019-01",
+      "members": 201,
+      "observation_date": "2018-12-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 201
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 201,
+      "entry_date": "2019-02-01",
+      "exit_date": "2019-03-04",
+      "holding_month": "2019-02",
+      "members": 201,
+      "observation_date": "2019-01-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [
+            {
+              "holding_month": "2019-02",
+              "instrument": "A000030",
+              "missing_dates": [
+                "2019-02-13",
+                "2019-02-14",
+                "2019-02-15",
+                "2019-02-18",
+                "2019-02-19",
+                "2019-02-20",
+                "2019-02-21",
+                "2019-02-22",
+                "2019-02-25",
+                "2019-02-26",
+                "2019-02-27",
+                "2019-02-28",
+                "2019-03-04"
+              ],
+              "portfolio": "baseline"
+            }
+          ],
+          "holding_return_missing": 1,
+          "selected": 201
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [
+            {
+              "holding_month": "2019-02",
+              "instrument": "A000030",
+              "missing_dates": [
+                "2019-02-13",
+                "2019-02-14",
+                "2019-02-15",
+                "2019-02-18",
+                "2019-02-19",
+                "2019-02-20",
+                "2019-02-21",
+                "2019-02-22",
+                "2019-02-25",
+                "2019-02-26",
+                "2019-02-27",
+                "2019-02-28",
+                "2019-03-04"
+              ],
+              "portfolio": "low_pbr"
+            }
+          ],
+          "holding_return_missing": 1,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-03-04",
+      "exit_date": "2019-04-01",
+      "holding_month": "2019-03",
+      "members": 201,
+      "observation_date": "2019-02-28",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2019-04-01",
+      "exit_date": "2019-05-02",
+      "holding_month": "2019-04",
+      "members": 201,
+      "observation_date": "2019-03-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2019-05-02",
+      "exit_date": "2019-06-03",
+      "holding_month": "2019-05",
+      "members": 200,
+      "observation_date": "2019-04-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-06-03",
+      "exit_date": "2019-07-01",
+      "holding_month": "2019-06",
+      "members": 200,
+      "observation_date": "2019-05-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-07-01",
+      "exit_date": "2019-08-01",
+      "holding_month": "2019-07",
+      "members": 200,
+      "observation_date": "2019-06-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-08-01",
+      "exit_date": "2019-09-02",
+      "holding_month": "2019-08",
+      "members": 200,
+      "observation_date": "2019-07-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-09-02",
+      "exit_date": "2019-10-01",
+      "holding_month": "2019-09",
+      "members": 200,
+      "observation_date": "2019-08-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-10-01",
+      "exit_date": "2019-11-01",
+      "holding_month": "2019-10",
+      "members": 200,
+      "observation_date": "2019-09-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-11-01",
+      "exit_date": "2019-12-02",
+      "holding_month": "2019-11",
+      "members": 200,
+      "observation_date": "2019-10-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2019-12-02",
+      "exit_date": "2020-01-02",
+      "holding_month": "2019-12",
+      "members": 200,
+      "observation_date": "2019-11-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-01-02",
+      "exit_date": "2020-02-03",
+      "holding_month": "2020-01",
+      "members": 200,
+      "observation_date": "2019-12-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-02-03",
+      "exit_date": "2020-03-02",
+      "holding_month": "2020-02",
+      "members": 200,
+      "observation_date": "2020-01-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-03-02",
+      "exit_date": "2020-04-01",
+      "holding_month": "2020-03",
+      "members": 200,
+      "observation_date": "2020-02-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-04-01",
+      "exit_date": "2020-05-04",
+      "holding_month": "2020-04",
+      "members": 200,
+      "observation_date": "2020-03-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-05-04",
+      "exit_date": "2020-06-01",
+      "holding_month": "2020-05",
+      "members": 200,
+      "observation_date": "2020-04-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2020-06-01",
+      "exit_date": "2020-07-01",
+      "holding_month": "2020-06",
+      "members": 200,
+      "observation_date": "2020-05-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-07-01",
+      "exit_date": "2020-08-03",
+      "holding_month": "2020-07",
+      "members": 200,
+      "observation_date": "2020-06-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-08-03",
+      "exit_date": "2020-09-01",
+      "holding_month": "2020-08",
+      "members": 200,
+      "observation_date": "2020-07-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-09-01",
+      "exit_date": "2020-10-05",
+      "holding_month": "2020-09",
+      "members": 200,
+      "observation_date": "2020-08-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-10-05",
+      "exit_date": "2020-11-02",
+      "holding_month": "2020-10",
+      "members": 200,
+      "observation_date": "2020-09-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-11-02",
+      "exit_date": "2020-12-01",
+      "holding_month": "2020-11",
+      "members": 200,
+      "observation_date": "2020-10-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2020-12-01",
+      "exit_date": "2021-01-04",
+      "holding_month": "2020-12",
+      "members": 200,
+      "observation_date": "2020-11-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 198,
+      "entry_date": "2021-01-04",
+      "exit_date": "2021-02-01",
+      "holding_month": "2021-01",
+      "members": 200,
+      "observation_date": "2020-12-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 198
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 198,
+      "entry_date": "2021-02-01",
+      "exit_date": "2021-03-02",
+      "holding_month": "2021-02",
+      "members": 201,
+      "observation_date": "2021-01-29",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 198
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 198,
+      "entry_date": "2021-03-02",
+      "exit_date": "2021-04-01",
+      "holding_month": "2021-03",
+      "members": 201,
+      "observation_date": "2021-02-26",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 3,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 198
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-04-01",
+      "exit_date": "2021-05-03",
+      "holding_month": "2021-04",
+      "members": 201,
+      "observation_date": "2021-03-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-05-03",
+      "exit_date": "2021-06-01",
+      "holding_month": "2021-05",
+      "members": 201,
+      "observation_date": "2021-04-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-06-01",
+      "exit_date": "2021-07-01",
+      "holding_month": "2021-06",
+      "members": 202,
+      "observation_date": "2021-05-31",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 2,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 196,
+      "entry_date": "2021-07-01",
+      "exit_date": "2021-08-02",
+      "holding_month": "2021-07",
+      "members": 200,
+      "observation_date": "2021-06-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 4,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 196
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 196,
+      "entry_date": "2021-08-02",
+      "exit_date": "2021-09-01",
+      "holding_month": "2021-08",
+      "members": 200,
+      "observation_date": "2021-07-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 4,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 196
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-09-01",
+      "exit_date": "2021-10-01",
+      "holding_month": "2021-09",
+      "members": 200,
+      "observation_date": "2021-08-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-10-01",
+      "exit_date": "2021-11-01",
+      "holding_month": "2021-10",
+      "members": 200,
+      "observation_date": "2021-09-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-11-01",
+      "exit_date": "2021-12-01",
+      "holding_month": "2021-11",
+      "members": 200,
+      "observation_date": "2021-10-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2021-12-01",
+      "exit_date": "2022-01-03",
+      "holding_month": "2021-12",
+      "members": 201,
+      "observation_date": "2021-11-30",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 197,
+      "entry_date": "2022-01-03",
+      "exit_date": "2022-02-03",
+      "holding_month": "2022-01",
+      "members": 200,
+      "observation_date": "2021-12-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 3,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 197
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 197,
+      "entry_date": "2022-02-03",
+      "exit_date": "2022-03-02",
+      "holding_month": "2022-02",
+      "members": 200,
+      "observation_date": "2022-01-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 3,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 197
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 197,
+      "entry_date": "2022-03-02",
+      "exit_date": "2022-04-01",
+      "holding_month": "2022-03",
+      "members": 200,
+      "observation_date": "2022-02-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 3,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 197
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-04-01",
+      "exit_date": "2022-05-02",
+      "holding_month": "2022-04",
+      "members": 200,
+      "observation_date": "2022-03-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-05-02",
+      "exit_date": "2022-06-02",
+      "holding_month": "2022-05",
+      "members": 200,
+      "observation_date": "2022-04-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-06-02",
+      "exit_date": "2022-07-01",
+      "holding_month": "2022-06",
+      "members": 200,
+      "observation_date": "2022-05-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-07-01",
+      "exit_date": "2022-08-01",
+      "holding_month": "2022-07",
+      "members": 200,
+      "observation_date": "2022-06-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-08-01",
+      "exit_date": "2022-09-01",
+      "holding_month": "2022-08",
+      "members": 200,
+      "observation_date": "2022-07-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-09-01",
+      "exit_date": "2022-10-04",
+      "holding_month": "2022-09",
+      "members": 200,
+      "observation_date": "2022-08-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-10-04",
+      "exit_date": "2022-11-01",
+      "holding_month": "2022-10",
+      "members": 200,
+      "observation_date": "2022-09-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-11-01",
+      "exit_date": "2022-12-01",
+      "holding_month": "2022-11",
+      "members": 200,
+      "observation_date": "2022-10-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2022-12-01",
+      "exit_date": "2023-01-02",
+      "holding_month": "2022-12",
+      "members": 200,
+      "observation_date": "2022-11-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-01-02",
+      "exit_date": "2023-02-01",
+      "holding_month": "2023-01",
+      "members": 200,
+      "observation_date": "2022-12-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-02-01",
+      "exit_date": "2023-03-02",
+      "holding_month": "2023-02",
+      "members": 200,
+      "observation_date": "2023-01-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-03-02",
+      "exit_date": "2023-04-03",
+      "holding_month": "2023-03",
+      "members": 200,
+      "observation_date": "2023-02-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-04-03",
+      "exit_date": "2023-05-02",
+      "holding_month": "2023-04",
+      "members": 200,
+      "observation_date": "2023-03-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-05-02",
+      "exit_date": "2023-06-01",
+      "holding_month": "2023-05",
+      "members": 200,
+      "observation_date": "2023-04-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-06-01",
+      "exit_date": "2023-07-03",
+      "holding_month": "2023-06",
+      "members": 200,
+      "observation_date": "2023-05-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-07-03",
+      "exit_date": "2023-08-01",
+      "holding_month": "2023-07",
+      "members": 200,
+      "observation_date": "2023-06-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-08-01",
+      "exit_date": "2023-09-01",
+      "holding_month": "2023-08",
+      "members": 200,
+      "observation_date": "2023-07-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-09-01",
+      "exit_date": "2023-10-04",
+      "holding_month": "2023-09",
+      "members": 200,
+      "observation_date": "2023-08-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-10-04",
+      "exit_date": "2023-11-01",
+      "holding_month": "2023-10",
+      "members": 200,
+      "observation_date": "2023-09-27",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-11-01",
+      "exit_date": "2023-12-01",
+      "holding_month": "2023-11",
+      "members": 200,
+      "observation_date": "2023-10-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2023-12-01",
+      "exit_date": "2024-01-02",
+      "holding_month": "2023-12",
+      "members": 200,
+      "observation_date": "2023-11-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2024-01-02",
+      "exit_date": "2024-02-01",
+      "holding_month": "2024-01",
+      "members": 200,
+      "observation_date": "2023-12-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2024-02-01",
+      "exit_date": "2024-03-04",
+      "holding_month": "2024-02",
+      "members": 200,
+      "observation_date": "2024-01-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2024-03-04",
+      "exit_date": "2024-04-01",
+      "holding_month": "2024-03",
+      "members": 200,
+      "observation_date": "2024-02-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-04-01",
+      "exit_date": "2024-05-02",
+      "holding_month": "2024-04",
+      "members": 200,
+      "observation_date": "2024-03-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-05-02",
+      "exit_date": "2024-06-03",
+      "holding_month": "2024-05",
+      "members": 200,
+      "observation_date": "2024-04-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-06-03",
+      "exit_date": "2024-07-01",
+      "holding_month": "2024-06",
+      "members": 200,
+      "observation_date": "2024-05-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-07-01",
+      "exit_date": "2024-08-01",
+      "holding_month": "2024-07",
+      "members": 200,
+      "observation_date": "2024-06-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-08-01",
+      "exit_date": "2024-09-02",
+      "holding_month": "2024-08",
+      "members": 200,
+      "observation_date": "2024-07-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-09-02",
+      "exit_date": "2024-10-02",
+      "holding_month": "2024-09",
+      "members": 200,
+      "observation_date": "2024-08-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-10-02",
+      "exit_date": "2024-11-01",
+      "holding_month": "2024-10",
+      "members": 201,
+      "observation_date": "2024-09-30",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2024-11-01",
+      "exit_date": "2024-12-02",
+      "holding_month": "2024-11",
+      "members": 201,
+      "observation_date": "2024-10-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 1,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 201,
+      "entry_date": "2024-12-02",
+      "exit_date": "2025-01-02",
+      "holding_month": "2024-12",
+      "members": 201,
+      "observation_date": "2024-11-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 201
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-01-02",
+      "exit_date": "2025-02-03",
+      "holding_month": "2025-01",
+      "members": 200,
+      "observation_date": "2024-12-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-02-03",
+      "exit_date": "2025-03-04",
+      "holding_month": "2025-02",
+      "members": 200,
+      "observation_date": "2025-01-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-03-04",
+      "exit_date": "2025-04-01",
+      "holding_month": "2025-03",
+      "members": 200,
+      "observation_date": "2025-02-28",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-04-01",
+      "exit_date": "2025-05-02",
+      "holding_month": "2025-04",
+      "members": 200,
+      "observation_date": "2025-03-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-05-02",
+      "exit_date": "2025-06-02",
+      "holding_month": "2025-05",
+      "members": 200,
+      "observation_date": "2025-04-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-06-02",
+      "exit_date": "2025-07-01",
+      "holding_month": "2025-06",
+      "members": 200,
+      "observation_date": "2025-05-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-07-01",
+      "exit_date": "2025-08-01",
+      "holding_month": "2025-07",
+      "members": 200,
+      "observation_date": "2025-06-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-08-01",
+      "exit_date": "2025-09-01",
+      "holding_month": "2025-08",
+      "members": 200,
+      "observation_date": "2025-07-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-09-01",
+      "exit_date": "2025-10-01",
+      "holding_month": "2025-09",
+      "members": 200,
+      "observation_date": "2025-08-29",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-10-01",
+      "exit_date": "2025-11-03",
+      "holding_month": "2025-10",
+      "members": 200,
+      "observation_date": "2025-09-30",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 200,
+      "entry_date": "2025-11-03",
+      "exit_date": "2025-12-01",
+      "holding_month": "2025-11",
+      "members": 200,
+      "observation_date": "2025-10-31",
+      "pbr_missing": 0,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 200
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 40
+        }
+      },
+      "tail_count": 40
+    },
+    {
+      "eligible": 199,
+      "entry_date": "2025-12-01",
+      "exit_date": "2026-01-02",
+      "holding_month": "2025-12",
+      "members": 200,
+      "observation_date": "2025-11-28",
+      "pbr_missing": 1,
+      "pbr_negative": 0,
+      "pbr_zero": 0,
+      "portfolios": {
+        "baseline": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 199
+        },
+        "high_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        },
+        "low_pbr": {
+          "entry_unavailable": 0,
+          "holding_missing_cases": [],
+          "holding_return_missing": 0,
+          "selected": 39
+        }
+      },
+      "tail_count": 39
+    }
+  ],
+  "schema": "qlibx.eligibility_audit/v1",
+  "source_key_duplicates": {},
+  "status": "failed",
+  "study_id": "k200-low-pbr/v1",
+  "summary": {
+    "holding_months": 95,
+    "maximum_prior_pbr_lag_trading_days": 0,
+    "membership_additions": 95,
+    "membership_removals": 96,
+    "minimum_positive_pbr_coverage": 0.98,
+    "selected_entry_unavailable_security_months": 0,
+    "selected_holding_missing_security_months": 2,
+    "stale_pbr_candidates_excluded": 0
+  },
+  "warnings": [
+    {
+      "code": "extreme_adjusted_returns_observed",
+      "rows": 16
+    }
+  ]
+}

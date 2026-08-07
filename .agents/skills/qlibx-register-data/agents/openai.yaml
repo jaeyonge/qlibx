@@ -1,0 +1,4 @@
+interface:
+  display_name: "Qlibx Register Data"
+  short_description: "Register financial datasets with confirmed mappings"
+  default_prompt: "Use $qlibx-register-data to inspect and register this financial dataset safely."

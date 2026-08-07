@@ -1,13 +1,17 @@
 [project]
 name = "qlibx"
 version = "0.1.0"
-description = "Add your description here"
+description = "Agent-facing alpha research interfaces built around Qlib"
 readme = "README.md"
 authors = [
     { name = "Jaepil.Choi", email = "chljeffreyz@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "duckdb>=1.3.0",
+    "filelock>=3.16.0",
+    "numpy>=1.24.0",
+]
 
 [project.scripts]
 qlibx = "qlibx:main"

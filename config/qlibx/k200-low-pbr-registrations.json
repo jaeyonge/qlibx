@@ -1,0 +1,116 @@
+{
+  "schema": "qlibx.dataset_registration_bundle/v1",
+  "output_dir": "data/qlibx/registry",
+  "datasets": [
+    {
+      "dataset_id": "krx_calendar_local/v1",
+      "kind": "trading_calendar",
+      "source": {
+        "type": "csv",
+        "path": "DW/dw_fng_mirror/dw_fng_calendar.csv"
+      },
+      "required_fields": ["date", "is_open"],
+      "mappings": {"date": "일자", "is_open": "주식개장구분"},
+      "mapping_confirmed": true,
+      "key": ["date"],
+      "date_field": "date",
+      "date_format": "%Y%m%d",
+      "accepted_limitations": []
+    },
+    {
+      "dataset_id": "k200_membership_local/v1",
+      "kind": "point_in_time_universe",
+      "source": {
+        "type": "csv",
+        "path": "DW/fng_k200_members.csv"
+      },
+      "required_fields": ["date", "instrument", "market_cap"],
+      "mappings": {
+        "date": "일자",
+        "instrument": "종목코드2",
+        "market_cap": "상장시가총액"
+      },
+      "mapping_confirmed": true,
+      "key": ["date", "instrument"],
+      "date_field": "date",
+      "date_format": "%Y%m%d",
+      "accepted_limitations": [
+        "The A-prefixed security identifier namespace has no supplied formal crosswalk."
+      ]
+    },
+    {
+      "dataset_id": "dataguide_daily_valuation_local/v1",
+      "kind": "daily_valuation",
+      "source": {
+        "type": "parquet",
+        "path": "DW/dw_fng_mirror/dw_fng_valuation.parquet"
+      },
+      "required_fields": ["date", "instrument", "pbr", "beta"],
+      "mappings": {
+        "date": "일자",
+        "instrument": "종목약코드",
+        "pbr": "PBR",
+        "beta": "베타"
+      },
+      "mapping_confirmed": true,
+      "key": ["date", "instrument"],
+      "date_field": "date",
+      "date_format": "%Y%m%d",
+      "accepted_limitations": [
+        "Historical P/B revision and point-in-time provenance are not documented."
+      ]
+    },
+    {
+      "dataset_id": "dataguide_daily_prices_local/v1",
+      "kind": "daily_prices",
+      "source": {
+        "type": "csv",
+        "path": "DW/fng_stock_daily_prices.csv"
+      },
+      "required_fields": [
+        "date",
+        "instrument",
+        "reference_price",
+        "close",
+        "previous_close",
+        "adjustment_factor"
+      ],
+      "mappings": {
+        "date": "거래일자",
+        "instrument": "종목약코드",
+        "reference_price": "기준가",
+        "close": "종가",
+        "previous_close": "전일종가",
+        "adjustment_factor": "수정계수"
+      },
+      "mapping_confirmed": true,
+      "key": ["date", "instrument"],
+      "date_field": "date",
+      "date_format": "%Y%m%d",
+      "accepted_limitations": [
+        "The exact corporate-action and dividend coverage of 기준가 and 수정계수 is not documented."
+      ]
+    },
+    {
+      "dataset_id": "fgsc_classification_local/v1",
+      "kind": "point_in_time_classification",
+      "source": {
+        "type": "csv",
+        "path": "DW/DW_FNG_FGSC종목_20200101-20260430.csv"
+      },
+      "required_fields": ["date", "instrument", "sector_code"],
+      "mappings": {
+        "date": "일자",
+        "instrument": "종목약코드",
+        "sector_code": "FGSC지수코드"
+      },
+      "mapping_confirmed": true,
+      "key": ["date", "instrument"],
+      "date_field": "date",
+      "date_format": "%Y%m%d",
+      "accepted_limitations": [
+        "FGSC classifications begin in 2020 and the supplied data has no label codebook."
+      ]
+    }
+  ]
+}

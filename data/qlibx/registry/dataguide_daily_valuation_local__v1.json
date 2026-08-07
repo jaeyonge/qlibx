@@ -1,0 +1,41 @@
+{
+  "accepted_limitations": [
+    "Historical P/B revision and point-in-time provenance are not documented."
+  ],
+  "canonical_mapping": {
+    "beta": "베타",
+    "date": "일자",
+    "instrument": "종목약코드",
+    "pbr": "PBR"
+  },
+  "dataset_id": "dataguide_daily_valuation_local/v1",
+  "date_field": "date",
+  "date_format": "%Y%m%d",
+  "key": [
+    "date",
+    "instrument"
+  ],
+  "kind": "daily_valuation",
+  "mapping_confirmed": true,
+  "producer": {
+    "id": "qlibx.dataset_registration/v1",
+    "implementation_sha256": "0113afed16d014bc4b76ffa34c96000b6fffcf2f04a86c1354d629e85be0f8e2"
+  },
+  "profile": {
+    "duplicate_key_groups": 0,
+    "maximum_date": "20260720",
+    "minimum_date": "20180102",
+    "required_field_nulls": 0,
+    "rows": 5941113
+  },
+  "registered_at": "2026-08-07T16:12:37.535997Z",
+  "registration_id": "751702da7bcdf695dc72110b0817d44c1128fdb7a84ee49006c39f963d5333c2",
+  "schema": "qlibx.dataset_registration/v1",
+  "source": {
+    "path": "DW/dw_fng_mirror/dw_fng_valuation.parquet",
+    "sha256": "82b806844d102015790e3bb71713cd6a30e9c3e7d6099c1cea8284f932509e6b",
+    "size": 77078832,
+    "table": null,
+    "type": "parquet"
+  }
+}

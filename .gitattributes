@@ -1,0 +1,5 @@
+# Research CSV artifacts are generated with the RFC 4180 CRLF line ending.
+*.csv whitespace=cr-at-eol
+
+# Two trailing spaces are intentional CommonMark hard line breaks.
+*.md whitespace=-blank-at-eol
