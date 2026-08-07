@@ -12,3 +12,6 @@ wheels/
 # qlibx generated state and materialized datasets
 .qlibx/
 data/qlibx/
+
+# Raw financial source data (local only; never commit)
+/DW/

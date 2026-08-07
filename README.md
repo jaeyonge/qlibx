@@ -4,6 +4,23 @@
 [Qlib](https://github.com/microsoft/qlib). The current implementation focuses on
 safe research-data materialization rather than execution.
 
+## First project: KOSPI 200 low P/B
+
+The first research cycle tests whether the lowest-P/B KOSPI 200 stocks
+outperform an eligible equal-weight baseline and the highest-P/B stocks. It
+covers 2018-2025, with 2018-2022 used for discovery and 2023-2025 reserved for
+confirmation.
+
+The cycle completed reproducibly but was classified **invalid**: a selected
+February 2019 holding (`A000030`) has unresolved returns and no registered
+successor or corporate-action conversion. Performance is therefore descriptive
+only and supports no investment conclusion.
+
+- [HTML presentation](qlibx-research/first-cycle-presentation.html)
+- [Cycle closure](qlibx-research/first-cycle-closure.md)
+- [Evidence report](qlibx-research/runs/k200-low-pbr-v1/evidence-report.md)
+- [Frozen study design](qlibx-research/k200-low-pbr-study-plan.md)
+
 ## First target profile
 
 `qlib.research_daily/v1` publishes:
@@ -100,10 +117,6 @@ repository root.
 See [Qlib target profiles](docs/qlib-target-profiles.md), the
 [action-journal contract](docs/agent-action-journal-contract.md), and the
 [product requirements](docs/qlibx-prd.md) for details.
-
-The completed first-cycle outcome is documented in the
-[closure note](qlibx-research/first-cycle-closure.md) and the generated
-[evidence report](qlibx-research/runs/k200-low-pbr-v1/evidence-report.md).
 
 ## Tests
 

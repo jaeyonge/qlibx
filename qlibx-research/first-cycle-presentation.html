@@ -1,0 +1,1414 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qlibx First Project — From Alpha Idea to Honest Evidence</title>
+  <style>
+    :root {
+      --paper: #f6f4ee;
+      --paper-2: #eceae3;
+      --ink: #14272f;
+      --muted: #66767b;
+      --line: #cfd6d3;
+      --navy: #102c3a;
+      --teal: #087b73;
+      --teal-2: #51b8ad;
+      --gold: #e4a62d;
+      --red: #c4584d;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #091c25;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    button { font: inherit; }
+
+    .deck {
+      position: relative;
+      width: min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9 / 16));
+      background: var(--paper);
+      overflow: hidden;
+      box-shadow: 0 2rem 7rem rgba(0, 0, 0, 0.32);
+      isolation: isolate;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto 1fr auto;
+      gap: 3.2vh;
+      padding: 6.2vh 6.5vw 4.4vh;
+      background:
+        radial-gradient(circle at 89% 9%, rgba(81,184,173,.11), transparent 23%),
+        var(--paper);
+    }
+
+    .slide.active {
+      display: grid;
+      animation: enter .36s ease both;
+    }
+
+    @keyframes enter {
+      from { opacity: 0; transform: translateX(1.6%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slide.dark {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 83% 24%, rgba(81,184,173,.25), transparent 23%),
+        linear-gradient(135deg, #0c2633 0%, #123946 61%, #0a202b 100%);
+    }
+
+    .kicker {
+      margin: 0 0 1.1vh;
+      color: var(--teal);
+      font-size: clamp(11px, 1.15vw, 20px);
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .dark .kicker { color: #76d4cb; }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 10.5em;
+      font-size: clamp(34px, 4.5vw, 76px);
+      line-height: .99;
+      letter-spacing: -.045em;
+      font-weight: 770;
+    }
+
+    h2 {
+      max-width: 17em;
+      font-size: clamp(26px, 3.15vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -.035em;
+      font-weight: 760;
+    }
+
+    h3 {
+      font-size: clamp(15px, 1.45vw, 25px);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      max-width: 32em;
+      margin-top: 1.8vh;
+      color: #c8d6d9;
+      font-size: clamp(14px, 1.5vw, 25px);
+      line-height: 1.4;
+    }
+
+    .content {
+      min-height: 0;
+      display: grid;
+      align-items: center;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 5vw;
+      align-items: center;
+    }
+
+    .bullets {
+      display: grid;
+      gap: 2.1vh;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(13px, 1.35vw, 23px);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .bullets li {
+      position: relative;
+      padding-left: 1.3em;
+    }
+
+    .bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .48em;
+      width: .5em;
+      height: .5em;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .dark .bullets { color: #cedadc; }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      color: var(--muted);
+      font-size: clamp(9px, .78vw, 14px);
+      letter-spacing: .02em;
+    }
+
+    .dark .footer { color: #9fb4b8; }
+
+    .page {
+      font-variant-numeric: tabular-nums;
+      font-weight: 750;
+    }
+
+    .controls {
+      position: fixed;
+      z-index: 50;
+      right: max(1.2rem, calc((100vw - min(100vw, 100vh * 16 / 9)) / 2 + 1.2rem));
+      bottom: 1.1rem;
+      display: flex;
+      gap: .45rem;
+    }
+
+    .controls button {
+      width: 2.55rem;
+      height: 2.55rem;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 50%;
+      background: rgba(7,25,34,.74);
+      color: white;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .controls button:hover,
+    .controls button:focus-visible {
+      background: var(--teal);
+      outline: none;
+    }
+
+    .progress {
+      position: absolute;
+      z-index: 40;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 10%;
+      background: var(--gold);
+      transition: width .28s ease;
+    }
+
+    /* Slide 1 */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 5vw;
+    }
+
+    .evidence-line {
+      position: relative;
+      display: grid;
+      gap: 3.5vh;
+      padding-left: 2.5vw;
+    }
+
+    .evidence-line::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5%;
+      bottom: 5%;
+      width: 3px;
+      background: linear-gradient(var(--teal-2), var(--gold), var(--red));
+    }
+
+    .hero-step {
+      display: grid;
+      grid-template-columns: 2.5em 1fr;
+      gap: 1.1vw;
+      align-items: center;
+    }
+
+    .hero-step .n {
+      color: #9fe0d9;
+      font-size: clamp(21px, 2.3vw, 40px);
+      font-weight: 800;
+    }
+
+    .hero-step strong {
+      display: block;
+      font-size: clamp(17px, 1.75vw, 30px);
+    }
+
+    .hero-step span:last-child {
+      color: #aebfc3;
+      font-size: clamp(11px, 1vw, 18px);
+    }
+
+    /* Slide 2 */
+    .question-map {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2vw;
+      align-items: stretch;
+    }
+
+    .question-node {
+      position: relative;
+      min-height: 22vh;
+      padding: 2.5vh 1.6vw;
+      border-top: 4px solid var(--teal);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .question-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -1.1vw;
+      top: 45%;
+      color: var(--gold);
+      font-size: clamp(20px, 2vw, 34px);
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .node-key {
+      color: var(--teal);
+      font-size: clamp(10px, .95vw, 16px);
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .node-main {
+      font-size: clamp(17px, 1.75vw, 30px);
+      line-height: 1.08;
+      font-weight: 780;
+    }
+
+    .node-note {
+      color: var(--muted);
+      font-size: clamp(11px, 1vw, 17px);
+      line-height: 1.35;
+    }
+
+    /* Architecture */
+    .architecture {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.2vw;
+      padding-bottom: 8vh;
+    }
+
+    .architecture::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 49%;
+      height: 3px;
+      background: var(--line);
+      z-index: 0;
+    }
+
+    .component {
+      position: relative;
+      z-index: 1;
+      min-height: 25vh;
+      padding: 2.6vh 1.55vw;
+      border: 2px solid var(--navy);
+      border-radius: 50% 50% 44% 44% / 28% 28% 22% 22%;
+      background: var(--paper);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.1vh;
+    }
+
+    .component-index {
+      color: var(--teal);
+      font-size: clamp(10px, .9vw, 15px);
+      font-weight: 850;
+      letter-spacing: .12em;
+    }
+
+    .component p {
+      color: var(--muted);
+      font-size: clamp(10px, .9vw, 16px);
+      line-height: 1.3;
+    }
+
+    .journal-rail {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 0;
+      padding: 1.5vh 2vw;
+      border-left: 5px solid var(--gold);
+      background: #ebe3cf;
+      text-align: center;
+      font-size: clamp(12px, 1.15vw, 20px);
+      font-weight: 700;
+    }
+
+    /* Registration */
+    .registration-visual {
+      display: grid;
+      grid-template-columns: .85fr .2fr 1fr .2fr .9fr;
+      gap: .8vw;
+      align-items: center;
+    }
+
+    .source-stack {
+      display: grid;
+      gap: .9vh;
+    }
+
+    .source-strip {
+      padding: 1.3vh 1vw;
+      border-left: 4px solid var(--muted);
+      background: var(--white);
+      font-size: clamp(11px, 1.05vw, 18px);
+      font-weight: 700;
+    }
+
+    .map-gate {
+      min-height: 23vh;
+      padding: 2.2vh 1.4vw;
+      border: 2px solid var(--teal);
+      background: #e1f1ee;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .map-gate b {
+      font-size: clamp(16px, 1.55vw, 27px);
+    }
+
+    .map-gate small {
+      display: block;
+      margin-top: .8vh;
+      color: var(--muted);
+      font-size: clamp(10px, .9vw, 15px);
+    }
+
+    .arrow {
+      color: var(--gold);
+      text-align: center;
+      font-size: clamp(25px, 3vw, 52px);
+      font-weight: 800;
+    }
+
+    .record {
+      min-height: 23vh;
+      padding: 2.2vh 1.3vw;
+      border: 2px solid var(--navy);
+      background: var(--navy);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.3vh;
+    }
+
+    .record-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 1vw;
+      padding-bottom: .7vh;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      font-size: clamp(10px, .9vw, 16px);
+    }
+
+    .record-line span { color: #a8bcc0; }
+
+    /* Provider */
+    .provider {
+      display: grid;
+      grid-template-columns: 1fr .22fr 1.1fr;
+      align-items: center;
+      gap: 2vw;
+    }
+
+    .provider-layers {
+      display: grid;
+      gap: 1.2vh;
+    }
+
+    .layer {
+      padding: 2vh 1.5vw;
+      background: white;
+      border-left: 5px solid var(--teal);
+    }
+
+    .layer h3 { margin-bottom: .4vh; }
+
+    .layer p {
+      color: var(--muted);
+      font-size: clamp(10px, .95vw, 16px);
+    }
+
+    .qlib-frame {
+      position: relative;
+      min-height: 34vh;
+      padding: 5vh 2.5vw 2.5vh;
+      border: 3px solid var(--navy);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: linear-gradient(150deg, #fff, #e7efec);
+    }
+
+    .qlib-frame::before {
+      content: "QLIB-COMPATIBLE";
+      position: absolute;
+      left: 1.6vw;
+      top: 1.4vh;
+      color: var(--teal);
+      font-size: clamp(9px, .8vw, 14px);
+      font-weight: 850;
+      letter-spacing: .14em;
+    }
+
+    .big-count {
+      color: var(--navy);
+      font-size: clamp(35px, 4.5vw, 76px);
+      font-weight: 820;
+      letter-spacing: -.04em;
+    }
+
+    .big-count + p {
+      margin-top: .5vh;
+      color: var(--muted);
+      font-size: clamp(12px, 1.15vw, 19px);
+    }
+
+    /* Experiment */
+    .experiment {
+      display: grid;
+      grid-template-columns: 1.5fr .75fr;
+      gap: 4vw;
+      align-items: center;
+    }
+
+    .portfolio-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4vw;
+    }
+
+    .portfolio {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      padding: 1.4vw;
+      text-align: center;
+      color: white;
+    }
+
+    .portfolio.low { background: var(--teal); }
+    .portfolio.base { background: var(--navy); }
+    .portfolio.high { background: #799097; }
+
+    .portfolio strong {
+      display: block;
+      font-size: clamp(16px, 1.6vw, 27px);
+    }
+
+    .portfolio span {
+      display: block;
+      margin-top: .5vh;
+      font-size: clamp(10px, .9vw, 15px);
+      opacity: .82;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 2vh;
+    }
+
+    .period {
+      padding: 2.1vh 1.4vw;
+      border-left: 6px solid var(--gold);
+      background: white;
+    }
+
+    .period.confirm { border-color: var(--teal); }
+
+    .period b {
+      display: block;
+      font-size: clamp(16px, 1.5vw, 26px);
+    }
+
+    .period span {
+      color: var(--muted);
+      font-size: clamp(11px, 1vw, 17px);
+    }
+
+    /* Guardrails */
+    .gate-scene {
+      display: grid;
+      grid-template-columns: 1fr .26fr 1fr;
+      gap: 2vw;
+      align-items: center;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 1.2vh;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 2.2em 1fr;
+      gap: .8vw;
+      align-items: center;
+      padding: 1.4vh 1.2vw;
+      background: white;
+      font-size: clamp(11px, 1.05vw, 18px);
+      font-weight: 700;
+    }
+
+    .check .mark {
+      width: 1.8em;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #d8eee9;
+      color: var(--teal);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .gate {
+      height: 36vh;
+      border-left: 7px solid var(--gold);
+      border-right: 7px solid var(--gold);
+      position: relative;
+    }
+
+    .gate::after {
+      content: "";
+      position: absolute;
+      top: 18%;
+      left: -3vw;
+      width: 6vw;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(-25deg);
+      transform-origin: left center;
+    }
+
+    .stop {
+      padding: 3vh 2vw;
+      border: 3px solid var(--red);
+      background: #f2ded9;
+    }
+
+    .stop-label {
+      color: var(--red);
+      font-size: clamp(11px, 1vw, 17px);
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .stop h3 {
+      margin: 1vh 0;
+      font-size: clamp(20px, 2vw, 34px);
+    }
+
+    .stop p {
+      color: var(--muted);
+      font-size: clamp(11px, 1vw, 17px);
+      line-height: 1.35;
+    }
+
+    /* Flow */
+    .flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1.25vw;
+      align-items: start;
+    }
+
+    .flow::before {
+      content: "";
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 3.35vh;
+      height: 3px;
+      background: var(--line);
+    }
+
+    .flow-step {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .flow-dot {
+      width: 6.7vh;
+      height: 6.7vh;
+      margin: 0 auto 2vh;
+      border: 3px solid var(--navy);
+      border-radius: 50%;
+      background: var(--paper);
+      display: grid;
+      place-items: center;
+      color: var(--teal);
+      font-size: clamp(14px, 1.4vw, 24px);
+      font-weight: 850;
+    }
+
+    .flow-step.blocked .flow-dot {
+      border-color: var(--red);
+      color: var(--red);
+      background: #f2ded9;
+    }
+
+    .flow-step b {
+      display: block;
+      min-height: 2.5em;
+      font-size: clamp(11px, 1.05vw, 18px);
+      line-height: 1.2;
+    }
+
+    .flow-step span {
+      display: block;
+      margin-top: .7vh;
+      color: var(--muted);
+      font-size: clamp(9px, .78vw, 14px);
+      line-height: 1.25;
+    }
+
+    .flow-caption {
+      width: 70%;
+      margin: 5vh auto 0;
+      padding: 1.5vh 1.5vw;
+      border-left: 5px solid var(--red);
+      background: #f1e2de;
+      text-align: center;
+      color: var(--ink);
+      font-size: clamp(12px, 1.15vw, 20px);
+      font-weight: 700;
+    }
+
+    /* Results */
+    .results {
+      display: grid;
+      grid-template-columns: 1.55fr .65fr;
+      gap: 4vw;
+      align-items: center;
+    }
+
+    .chart {
+      position: relative;
+      padding: 3vh 2vw 2.3vh;
+      background: white;
+    }
+
+    .chart-axis {
+      display: grid;
+      grid-template-columns: 10em 1fr;
+      margin-bottom: 1.3vh;
+      color: var(--muted);
+      font-size: clamp(9px, .78vw, 13px);
+    }
+
+    .axis-scale {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .ci-row {
+      display: grid;
+      grid-template-columns: 10em 1fr;
+      align-items: center;
+      min-height: 7.6vh;
+      border-top: 1px solid var(--line);
+    }
+
+    .ci-row:last-child { border-bottom: 1px solid var(--line); }
+
+    .ci-label {
+      padding-right: 1vw;
+      font-size: clamp(10px, .95vw, 16px);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .ci-label small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .ci-track {
+      position: relative;
+      height: 100%;
+      background:
+        linear-gradient(to right, transparent 49.75%, var(--navy) 49.75%, var(--navy) 50.25%, transparent 50.25%);
+    }
+
+    .interval {
+      position: absolute;
+      top: 50%;
+      height: 4px;
+      transform: translateY(-50%);
+      background: var(--teal-2);
+    }
+
+    .interval::before,
+    .interval::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      width: 2px;
+      height: 14px;
+      background: var(--teal-2);
+    }
+
+    .interval::before { left: 0; }
+    .interval::after { right: 0; }
+
+    .mean-dot {
+      position: absolute;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      transform: translate(-50%, -50%);
+      border: 3px solid white;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 1px var(--teal);
+    }
+
+    .result-callout {
+      display: grid;
+      gap: 2.2vh;
+    }
+
+    .metric {
+      padding: 2.4vh 1.5vw;
+      border-left: 5px solid var(--teal);
+      background: white;
+    }
+
+    .metric.invalid { border-color: var(--red); }
+
+    .metric b {
+      display: block;
+      font-size: clamp(23px, 2.5vw, 43px);
+      letter-spacing: -.03em;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: clamp(10px, .9vw, 16px);
+    }
+
+    /* Close */
+    .close {
+      display: grid;
+      grid-template-columns: .65fr 1.35fr;
+      gap: 5vw;
+      align-items: center;
+    }
+
+    .verdict {
+      aspect-ratio: 1;
+      border: 4px solid var(--red);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transform: rotate(-4deg);
+      color: var(--red);
+    }
+
+    .verdict b {
+      display: block;
+      font-size: clamp(28px, 3.5vw, 60px);
+      letter-spacing: .05em;
+    }
+
+    .verdict span {
+      display: block;
+      margin-top: .5vh;
+      color: var(--ink);
+      font-size: clamp(10px, 1vw, 17px);
+      font-weight: 650;
+    }
+
+    .roadmap {
+      position: relative;
+      display: grid;
+      gap: 1.2vh;
+    }
+
+    .roadmap::before {
+      content: "";
+      position: absolute;
+      left: 1.45em;
+      top: 10%;
+      bottom: 10%;
+      width: 3px;
+      background: var(--line);
+    }
+
+    .road-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 3em 1fr;
+      gap: 1.2vw;
+      align-items: center;
+      padding: 1.5vh 0;
+    }
+
+    .road-n {
+      z-index: 1;
+      width: 3em;
+      height: 3em;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: clamp(11px, 1vw, 17px);
+      font-weight: 850;
+    }
+
+    .road-step:first-child .road-n { background: var(--teal); }
+
+    .road-step b {
+      display: block;
+      font-size: clamp(14px, 1.35vw, 23px);
+    }
+
+    .road-step span {
+      color: var(--muted);
+      font-size: clamp(10px, .9vw, 16px);
+    }
+
+    .source {
+      color: var(--muted);
+      font-size: clamp(8px, .68vw, 12px);
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .controls { right: .8rem; bottom: .8rem; }
+    }
+
+    @media print {
+      html, body { overflow: visible; background: white; }
+      body { display: block; }
+      .deck { width: 100%; height: auto; box-shadow: none; overflow: visible; }
+      .slide, .slide.active {
+        position: relative;
+        display: grid;
+        width: 13.333in;
+        height: 7.5in;
+        break-after: page;
+        animation: none;
+      }
+      .controls, .progress { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide.active { animation: none; }
+      .progress > span { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck" aria-label="Qlibx first project presentation">
+    <section class="slide dark active" aria-label="Slide 1 of 10">
+      <header>
+        <p class="kicker">Qlibx · First research cycle</p>
+      </header>
+      <div class="content hero">
+        <div>
+          <h1>From an alpha idea to honest evidence</h1>
+          <p class="subtitle">A small, reproducible test of low P/B investing in the KOSPI 200</p>
+        </div>
+        <div class="evidence-line" aria-label="Project purpose">
+          <div class="hero-step">
+            <span class="n">01</span>
+            <span><strong>Start small</strong><span>One fundamental idea, one market</span></span>
+          </div>
+          <div class="hero-step">
+            <span class="n">02</span>
+            <span><strong>Make it repeatable</strong><span>Frozen rules, registered data</span></span>
+          </div>
+          <div class="hero-step">
+            <span class="n">03</span>
+            <span><strong>Trust the stop sign</strong><span>Bad evidence must block a conclusion</span></span>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>Cross-functional briefing · 2026-08-08</span>
+        <span class="page">01 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 2 of 10">
+      <header>
+        <p class="kicker">Problem & scope</p>
+        <h2>We needed a learning loop—not a full trading platform</h2>
+      </header>
+      <div class="content">
+        <div class="question-map" aria-label="Research question structure">
+          <div class="question-node">
+            <span class="node-key">Signal</span>
+            <span class="node-main">Low price-to-book</span>
+            <span class="node-note">Are cheaper-looking companies mispriced?</span>
+          </div>
+          <div class="question-node">
+            <span class="node-key">Universe</span>
+            <span class="node-main">KOSPI 200 members</span>
+            <span class="node-note">Membership changes through time</span>
+          </div>
+          <div class="question-node">
+            <span class="node-key">Portfolio</span>
+            <span class="node-main">Monthly, equal weight</span>
+            <span class="node-note">Low P/B vs market and high P/B</span>
+          </div>
+          <div class="question-node">
+            <span class="node-key">Evidence</span>
+            <span class="node-main">2018–2025</span>
+            <span class="node-note">Discovery first, confirmation second</span>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>Goal: learn how to test an investment idea without fooling ourselves</span>
+        <span class="page">02 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 3 of 10">
+      <header>
+        <p class="kicker">System at a glance</p>
+        <h2>Four components turn raw files into a defensible decision</h2>
+      </header>
+      <div class="content">
+        <div class="architecture" aria-label="Overall qlibx architecture">
+          <div class="component">
+            <span class="component-index">01 · REGISTER</span>
+            <h3>Data contract</h3>
+            <p>Agree what every column means</p>
+          </div>
+          <div class="component">
+            <span class="component-index">02 · BUILD</span>
+            <h3>Qlib dataset</h3>
+            <p>Package time-aware research data</p>
+          </div>
+          <div class="component">
+            <span class="component-index">03 · TEST</span>
+            <h3>Research engine</h3>
+            <p>Apply the frozen portfolio rules</p>
+          </div>
+          <div class="component">
+            <span class="component-index">04 · DECIDE</span>
+            <h3>Evidence gate</h3>
+            <p>Accept, reject, or invalidate</p>
+          </div>
+          <div class="journal-rail">Action journal + immutable hashes make every stage traceable</div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>Same shape = same role throughout the deck</span>
+        <span class="page">03 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 4 of 10">
+      <header>
+        <p class="kicker">Component 1 · Data registration</p>
+        <h2>Registration turns unfamiliar files into dependable inputs</h2>
+      </header>
+      <div class="content">
+        <div class="registration-visual" aria-label="Data registration diagram">
+          <div class="source-stack">
+            <div class="source-strip">Calendar</div>
+            <div class="source-strip">KOSPI 200 membership</div>
+            <div class="source-strip">P/B + market value</div>
+            <div class="source-strip">Prices + adjustments</div>
+            <div class="source-strip">Sector codes</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="map-gate">
+            <div>
+              <b>Meaning check</b>
+              <small>Map headers · validate dates · detect duplicates</small>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="record">
+            <div class="record-line"><span>Mapping</span><b>confirmed</b></div>
+            <div class="record-line"><span>Source</span><b>hashed</b></div>
+            <div class="record-line"><span>Coverage</span><b>profiled</b></div>
+            <div class="record-line"><span>Identity</span><b>immutable</b></div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>Ambiguous columns stop for human clarification</span>
+        <span class="page">04 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 5 of 10">
+      <header>
+        <p class="kicker">Component 2 · Research dataset</p>
+        <h2>The provider gives every test the same market clock and universe</h2>
+      </header>
+      <div class="content provider">
+        <div class="provider-layers">
+          <div class="layer">
+            <h3>Calendar</h3>
+            <p>1,965 Korean trading dates</p>
+          </div>
+          <div class="layer">
+            <h3>Dynamic universe</h3>
+            <p>Who belonged to the KOSPI 200 each day</p>
+          </div>
+          <div class="layer">
+            <h3>Research features</h3>
+            <p>P/B and adjusted daily return</p>
+          </div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="qlib-frame">
+          <div>
+            <div class="big-count">2018–2025</div>
+            <p>Usable period for the frozen study</p>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>Qlib-compatible = readable through the shared research library</span>
+        <span class="page">05 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 6 of 10">
+      <header>
+        <p class="kicker">Component 3 · Research engine</p>
+        <h2>One monthly experiment compares three transparent portfolios</h2>
+      </header>
+      <div class="content experiment">
+        <div class="portfolio-row" aria-label="Three compared portfolios">
+          <div class="portfolio low">
+            <div><strong>Low P/B</strong><span>Cheapest 20%</span></div>
+          </div>
+          <div class="portfolio base">
+            <div><strong>Baseline</strong><span>All eligible members</span></div>
+          </div>
+          <div class="portfolio high">
+            <div><strong>High P/B</strong><span>Most expensive 20%</span></div>
+          </div>
+        </div>
+        <div class="timeline" aria-label="Research periods">
+          <div class="period">
+            <b>2018–2022</b>
+            <span>Discovery · learn what happened</span>
+          </div>
+          <div class="period confirm">
+            <b>2023–2025</b>
+            <span>Confirmation · test without retuning</span>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>Observe month-end → enter next close → hold until the next rebalance</span>
+        <span class="page">06 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 7 of 10">
+      <header>
+        <p class="kicker">Component 4 · Evidence gate</p>
+        <h2>Guardrails matter most when they stop an attractive story</h2>
+      </header>
+      <div class="content gate-scene">
+        <div class="checklist" aria-label="Research checks">
+          <div class="check"><span class="mark">✓</span><span>Point-in-time index membership</span></div>
+          <div class="check"><span class="mark">✓</span><span>Deterministic ties and turnover</span></div>
+          <div class="check"><span class="mark">✓</span><span>Corporate-action formula checks</span></div>
+          <div class="check"><span class="mark">✓</span><span>Byte-for-byte reproduction</span></div>
+        </div>
+        <div class="gate" aria-hidden="true"></div>
+        <div class="stop">
+          <span class="stop-label">Blocking issue</span>
+          <h3>A000030 disappears</h3>
+          <p>No registered successor or conversion mapping for a selected February 2019 holding.</p>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>The system completed the run—but refused to overclaim</span>
+        <span class="page">07 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 8 of 10">
+      <header>
+        <p class="kicker">End-to-end flow</p>
+        <h2>Evidence moves through seven explicit checkpoints</h2>
+      </header>
+      <div class="content" style="display:block;padding-top:5vh">
+        <div class="flow" aria-label="Research process flowchart">
+          <div class="flow-step">
+            <div class="flow-dot">1</div>
+            <b>Freeze the question</b>
+            <span>No tuning after results</span>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot">2</div>
+            <b>Register sources</b>
+            <span>Meaning + identity</span>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot">3</div>
+            <b>Build provider</b>
+            <span>Shared Qlib format</span>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot">4</div>
+            <b>Audit eligibility</b>
+            <span>Coverage + look-ahead</span>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot">5</div>
+            <b>Form portfolios</b>
+            <span>Monthly rules</span>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot">6</div>
+            <b>Compare outcomes</b>
+            <span>Returns + risks</span>
+          </div>
+          <div class="flow-step blocked">
+            <div class="flow-dot">7</div>
+            <b>Classify evidence</b>
+            <span>Invalid this cycle</span>
+          </div>
+        </div>
+        <div class="flow-caption">Any failed checkpoint changes the conclusion—not the historical data.</div>
+      </div>
+      <footer class="footer">
+        <span>Every checkpoint writes an append-only action record</span>
+        <span class="page">08 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 9 of 10">
+      <header>
+        <p class="kicker">Results · descriptive only</p>
+        <h2>The confirmation period showed no robust low-P/B advantage</h2>
+      </header>
+      <div class="content results">
+        <div class="chart" role="img" aria-label="Average monthly return differences and 95 percent confidence intervals">
+          <div class="chart-axis">
+            <span>Average monthly difference</span>
+            <div class="axis-scale"><span>−2%</span><span>0</span><span>+2%</span></div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">Discovery<small>Low − baseline</small></div>
+            <div class="ci-track">
+              <span class="interval" style="left:41.25%;width:30.25%"></span>
+              <span class="mean-dot" style="left:55.75%"></span>
+            </div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">Discovery<small>Low − high</small></div>
+            <div class="ci-track">
+              <span class="interval" style="left:36.25%;width:64.75%"></span>
+              <span class="mean-dot" style="left:66.25%"></span>
+            </div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">Confirmation<small>Low − baseline</small></div>
+            <div class="ci-track">
+              <span class="interval" style="left:24.5%;width:40.75%"></span>
+              <span class="mean-dot" style="left:47.5%"></span>
+            </div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">Confirmation<small>Low − high</small></div>
+            <div class="ci-track">
+              <span class="interval" style="left:9%;width:81.75%"></span>
+              <span class="mean-dot" style="left:53.25%"></span>
+            </div>
+          </div>
+        </div>
+        <div class="result-callout">
+          <div class="metric">
+            <b>−0.10%</b>
+            <span>monthly vs baseline · confirmation</span>
+          </div>
+          <div class="metric">
+            <b>+0.13%</b>
+            <span>monthly vs high P/B · confirmation</span>
+          </div>
+          <div class="metric invalid">
+            <b>INVALID</b>
+            <span>data issue overrides performance</span>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span class="source">Source: frozen run cfd6578… · 95% moving-block intervals cross zero</span>
+        <span class="page">09 / 10</span>
+      </footer>
+    </section>
+
+    <section class="slide" aria-label="Slide 10 of 10">
+      <header>
+        <p class="kicker">Decision & next cycle</p>
+        <h2>The process worked; the evidence did not pass</h2>
+      </header>
+      <div class="content close">
+        <div class="verdict" aria-label="Evidence classified invalid">
+          <div><b>INVALID</b><span>No investment conclusion</span></div>
+        </div>
+        <div class="roadmap" aria-label="Next steps">
+          <div class="road-step">
+            <span class="road-n">1</span>
+            <span><b>Register corporate-action successors</b><span>Handle conversions such as A000030 explicitly</span></span>
+          </div>
+          <div class="road-step">
+            <span class="road-n">2</span>
+            <span><b>Freeze a separate v2 study</b><span>Never rewrite the completed v1 experiment</span></span>
+          </div>
+          <div class="road-step">
+            <span class="road-n">3</span>
+            <span><b>Only then test deeper controls</b><span>Sector, size, momentum, costs, and execution</span></span>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <span>First-cycle achievement: a reproducible way to learn safely</span>
+        <span class="page">10 / 10</span>
+      </footer>
+    </section>
+
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  </main>
+
+  <nav class="controls" aria-label="Slide controls">
+    <button id="prev" type="button" aria-label="Previous slide">←</button>
+    <button id="next" type="button" aria-label="Next slide">→</button>
+  </nav>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+      var progress = document.getElementById("progressBar");
+      var deck = document.getElementById("deck");
+      var current = 0;
+      var touchStartX = null;
+
+      function indexFromHash() {
+        var match = window.location.hash.match(/^#slide-(\d+)$/);
+        if (!match) return 0;
+        return Math.min(slides.length - 1, Math.max(0, Number(match[1]) - 1));
+      }
+
+      function show(index, updateHash) {
+        current = Math.min(slides.length - 1, Math.max(0, index));
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("active", i === current);
+          slide.setAttribute("aria-hidden", i === current ? "false" : "true");
+        });
+        progress.style.width = ((current + 1) / slides.length * 100) + "%";
+        document.getElementById("prev").disabled = current === 0;
+        document.getElementById("next").disabled = current === slides.length - 1;
+        if (updateHash) history.replaceState(null, "", "#slide-" + (current + 1));
+      }
+
+      function next() { show(current + 1, true); }
+      function previous() { show(current - 1, true); }
+
+      document.getElementById("next").addEventListener("click", next);
+      document.getElementById("prev").addEventListener("click", previous);
+
+      document.addEventListener("keydown", function (event) {
+        if (["ArrowRight", "PageDown", " "].indexOf(event.key) >= 0) {
+          event.preventDefault();
+          next();
+        } else if (["ArrowLeft", "PageUp"].indexOf(event.key) >= 0) {
+          event.preventDefault();
+          previous();
+        } else if (event.key === "Home") {
+          show(0, true);
+        } else if (event.key === "End") {
+          show(slides.length - 1, true);
+        }
+      });
+
+      deck.addEventListener("click", function (event) {
+        if (event.target.closest("button, a")) return;
+        var rect = deck.getBoundingClientRect();
+        if (event.clientX - rect.left < rect.width / 2) previous();
+        else next();
+      });
+
+      deck.addEventListener("touchstart", function (event) {
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+
+      deck.addEventListener("touchend", function (event) {
+        if (touchStartX === null) return;
+        var delta = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(delta) > 45) {
+          if (delta < 0) next();
+          else previous();
+        }
+        touchStartX = null;
+      }, { passive: true });
+
+      window.addEventListener("hashchange", function () {
+        show(indexFromHash(), false);
+      });
+
+      show(indexFromHash(), false);
+    }());
+  </script>
+</body>
+</html>
