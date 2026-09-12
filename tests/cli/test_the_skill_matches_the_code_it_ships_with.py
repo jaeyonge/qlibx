@@ -83,6 +83,17 @@ def test_the_skill_does_not_promise_a_register_force_flag(
     assert "--force" in refused["failures"][0]["requirement"]
 
 
+def test_the_long_risk_journey_uses_the_public_solver_and_the_two_run_order() -> None:
+    text = _shipped_prose()
+
+    assert "vq.SpectralFloorSolver" in text
+    assert "vqapr run risk-scores-run --force" in text
+    assert text.index("vqapr run risk-scores-run") < text.index(
+        "vqapr run weekly-risk-momentum-run"
+    )
+    assert "Deleting the certificate file changes only elapsed time" in text
+
+
 def test_a_plain_re_register_replaces_and_the_payload_says_which_fingerprint_it_replaced(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

@@ -40,6 +40,7 @@ records them. vqapr makes each one once, where it can be seen.
 | "Backtest 12-month momentum, top 30, equal weight, monthly" | a StrategyModel that returns target weights on a monthly schedule | **make-strategy**, then **run-backtest** |
 | "Build daily Fama-French SMB and HML" | each of the six sorted portfolios is a value-weighted StrategyModel on `academic`, one run each; a factor's daily return is the spread of their NAV returns. Built this way on Korean data, SMB and HML tracked a published replication at 0.99 and 0.97 daily correlation | **make-strategy** |
 | "Precompute a rolling beta or an ML prediction every strategy can use" | a DataModel: a per-instrument table computed session by session and registered as a dataset | **make-datamodel** |
+| "My daily covariance or scenario-risk model takes ten minutes and repeats the same safety checks" | a DataModel whose exact safe matrices receive reusable, disposable certificates before a StrategyModel consumes its scores | **make-datamodel**, then **make-strategy** and **run-backtest** |
 | "How much do costs and taxes eat?" | the same strategy on two venues | **make-exchange** |
 | "Cap any single name at 5%", "stay inside the mandate" | bounds the strategy builds inside, and a Compliance rule that watches the held book | **make-compliance** |
 | "Ensemble these alphas into a long-only enhanced index" | a StrategyModel whose inputs are other strategies' results | **make-strategy** |

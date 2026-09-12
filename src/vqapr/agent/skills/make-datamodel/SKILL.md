@@ -47,6 +47,11 @@ The file is loaded by its path and its directory is not on the import path, so a
 
 The `--lookback` / `--calendar-lookback` choice is not cosmetic. See below.
 
+For a long covariance or scenario-risk model, do not begin by changing the database or rewriting
+NumPy in C. First measure whether repeated spectral decomposition is the cost. If it is, follow the
+complete safe-first-run, fast-repeat, then-strategy path in
+[references/repeated-risk-model.md](references/repeated-risk-model.md).
+
 ## The lookback pair, and why it matters more here
 
 `RowsLookback(rows=N)` gives each name **its own** last N observations; `CalendarLookback(days=N,
