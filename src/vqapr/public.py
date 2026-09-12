@@ -122,6 +122,7 @@ from vqapr.signals.evaluation import (
     information_coefficient,
     rank_information_coefficient,
 )
+from vqapr.signals.risk import SpectralFloorSolver, SpectralFloorStats
 from vqapr.signals.transform import (
     NeutralizationRefusal,
     fama_french_assign,
@@ -254,6 +255,8 @@ __all__ = (
     "SimulationFailure",
     "SimulationResult",
     "SourceSpec",
+    "SpectralFloorSolver",
+    "SpectralFloorStats",
     "Stage",
     "Status",
     "StockInstrument",

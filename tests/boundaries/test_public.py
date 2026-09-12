@@ -244,6 +244,8 @@ def test_public_exports_are_fixed() -> None:
         "SimulationFailure",
         "SimulationResult",
         "SourceSpec",
+        "SpectralFloorSolver",
+        "SpectralFloorStats",
         "Stage",
         "Status",
         "StockInstrument",
