@@ -53,6 +53,8 @@ DataModel 결과를 어떻게 StrategyModel에 연결하고, 첫 실행과 반�
 | 증명 캐시 | 최초 734개 증명, 반복 뒤 개수 동일 |
 | 후속 주간 전략 | 129 decisions · 389 dealt fills · completed |
 | 결과 전달 | nav · holdings · fills · weights · report export 성공 |
+| 전체 저장소 검사 | 1,808 통과 · 6 skip · 122.22초 |
+| final wheel 재설치 | 공개 solver import와 risk reference 설치 확인 |
 
 이 작은 sample 여정은 공개 경로의 연결만 검증함. 속도 근거는 실제 DW 전체를 사용한 실험 253의
 14분 42초 → 1분 52초~2분 5초 결과임.

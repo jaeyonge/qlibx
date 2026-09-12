@@ -55,6 +55,9 @@
 | `uv run pytest tests/signals/test_spectral_floor.py -q` | 9 통과 |
 | `uv run ruff check src/vqapr/signals/risk.py src/vqapr/public.py` | 통과 |
 | `uv run pyright` | 0 errors, 0 warnings |
+| `uv run pytest tests/ -q -m ""` | 1,808 통과 · 6 skip · 122.22초 |
+| `uv build` | wheel과 sdist 생성 성공 |
+| final wheel 새 환경 import | `vqapr.public.SpectralFloorSolver` 성공 |
 | 실험 253 전체 공개 경로 | 기존 882.26초 · 최초 640.06초 · 반복 112.20~124.64초 |
 | 실험 253 결과 비교 | 팩터 파일 바이트 동일 · 주문/체결/보유/성과 동일 |
 
