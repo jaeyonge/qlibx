@@ -71,7 +71,19 @@ def _normalized(body: object, roots: tuple[str, ...]) -> object:
     text = re.sub(r'"correlation_id": "[0-9a-f]+"', '"correlation_id": "<id>"', text)
     text = re.sub(r'"traceback": "(?:[^"\\]|\\.)*"', '"traceback": "<traceback>"', text)
     text = re.sub(r"\.py:\d+ \(", ".py:<n> (", text)
-    return json.loads(text)
+    return _stable_noise(json.loads(text))
+
+
+def _stable_noise(value: object) -> object:
+    """Remove platform-dependent bytes while keeping every envelope field and sentence."""
+    if isinstance(value, dict):
+        return {key: _stable_noise(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_stable_noise(item) for item in value]
+    if isinstance(value, str):
+        value = value.replace("<root>\\", "<root>/")
+        return re.sub(r"(?<=file now )[0-9a-f]+…", "<digest>", value)
+    return value
 
 
 def _drop_last_day(execution: Path) -> None:
@@ -133,7 +145,7 @@ def test_regenerate_the_baseline(tmp_path: Path, capsys: pytest.CaptureFixture[s
 def test_check_and_run_say_what_they_said_before_the_move(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    expected = json.loads(BASELINE.read_text(encoding="utf-8"))
+    expected = _stable_noise(json.loads(BASELINE.read_text(encoding="utf-8")))
     actual = _envelopes(tmp_path, capsys)
     assert set(actual) == set(expected)
     for key in expected:

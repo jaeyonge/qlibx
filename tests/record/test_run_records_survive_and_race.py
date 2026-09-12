@@ -204,7 +204,10 @@ def test_a_process_hard_killed_mid_write_keeps_only_what_had_spilled(
     # A part is staged under a dotted name and renamed into place, so the first `000000.parquet`
     # is a complete file: the kill lands with at least one spill part on disk, by evidence.
     _wait_for(proc, lambda: any(table.glob(f"[0-9]*{PART_SUFFIX}")), "its first spill part")
-    proc.terminate()
+    # `terminate()` is SIGTERM on POSIX, and the probe deliberately installs a SIGTERM handler
+    # for the sibling graceful-interrupt test. `kill()` is the uncatchable hard stop this test
+    # names (and TerminateProcess on Windows).
+    proc.kill()
     proc.wait(timeout=180)
 
     assert run_ids(store) == ()
