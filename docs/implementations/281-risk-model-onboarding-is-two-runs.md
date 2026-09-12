@@ -47,8 +47,15 @@ DataModel 결과를 어떻게 StrategyModel에 연결하고, 첫 실행과 반�
 | 공개 solver 이름과 두 run 순서 계약 | 통과 |
 | `vqapr new datamodel ...` 실제 출력 확인 | `risk_scores.py`, `risk_scores.yaml`, `risk-scores-run` 확인 |
 | `vqapr new strategy ...` 실제 출력 확인 | `weekly_risk_momentum.py`, 등록 YAML 확인 |
+| built wheel을 새 빈 프로젝트에 설치 | 성공, 새 reference가 두 agent target에 설치됨 |
+| sample 온보딩 | 등록·check·run 성공, 1,468 events |
+| DataModel 최초/반복 | 각 734 sessions · 6,898 rows, parquet SHA-256 동일 |
+| 증명 캐시 | 최초 734개 증명, 반복 뒤 개수 동일 |
+| 후속 주간 전략 | 129 decisions · 389 dealt fills · completed |
+| 결과 전달 | nav · holdings · fills · weights · report export 성공 |
 
-완성 wheel에서의 설치·실행 결과와 전체 suite는 브랜치 완료 검증 뒤 추가함.
+이 작은 sample 여정은 공개 경로의 연결만 검증함. 속도 근거는 실제 DW 전체를 사용한 실험 253의
+14분 42초 → 1분 52초~2분 5초 결과임.
 
 ## 남은 한계
 

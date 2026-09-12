@@ -169,6 +169,12 @@ run fingerprint even when every economic value agrees.
 uv run vqapr new strategy weekly-risk-momentum --dataset risk-scores-values
 uv run vqapr register weekly_risk_momentum.yaml
 uv run vqapr new run --out weekly_risk_momentum_run.yaml
+```
+
+Fill the generated run with the registered exchange and execution dataset, the real instrument
+universe, period, weekly schedule, and `weekly-risk-momentum` component. Then register and run it:
+
+```bash
 uv run vqapr register weekly_risk_momentum_run.yaml
 uv run vqapr check weekly-risk-momentum-run
 time uv run vqapr run weekly-risk-momentum-run
