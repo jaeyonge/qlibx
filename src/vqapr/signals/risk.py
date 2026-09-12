@@ -87,6 +87,7 @@ class SpectralFloorSolver:
         self._margin_fallbacks = 0
         self._cache_usable = True
         self._cache_warning: str | None = None
+        self._cache_validated = self._cache is None
         self._header = self._make_header()
         self._load_cache()
 
@@ -190,6 +191,7 @@ class SpectralFloorSolver:
                 self._known.clear()
                 return
             self._known.add(digest)
+        self._cache_validated = True
 
     def _flush(self) -> None:
         if self._cache is None or not self._cache_usable or not self._pending:
@@ -208,6 +210,9 @@ class SpectralFloorSolver:
                 else:
                     with os.fdopen(descriptor, "w", encoding="ascii") as stream:
                         stream.write(self._header + "\n")
+                    self._cache_validated = True
+            elif not self._cache_validated:
+                self._load_cache()
             if not self._cache_usable:
                 return
             with self._cache.open("a", encoding="ascii") as stream:

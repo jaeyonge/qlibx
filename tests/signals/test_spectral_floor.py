@@ -101,6 +101,25 @@ def test_a_damaged_cache_is_ignored_without_changing_the_answer(tmp_path: Path) 
     assert cache.read_text(encoding="utf-8") == "not a vqapr certificate cache\n"
 
 
+def test_two_late_writers_cannot_mix_different_policies(tmp_path: Path) -> None:
+    """Both instances begin before the cache exists, which is the creation race."""
+    cache = tmp_path / "risk.certificates"
+    matrix = np.array([[2.0, 0.0], [0.0, 1.0]])
+    target = np.array([1.0, 1.0])
+    first = SpectralFloorSolver(cache, relative_floor=1e-3)
+    incompatible = SpectralFloorSolver(cache, relative_floor=2e-3)
+
+    first.solve(matrix, target)
+    incompatible.solve(matrix, target)
+    first.close()
+    before = cache.read_bytes()
+    incompatible.close()
+
+    assert incompatible.stats.cache_usable is False
+    assert "different version or solver policy" in (incompatible.stats.cache_warning or "")
+    assert cache.read_bytes() == before
+
+
 @pytest.mark.parametrize(
     ("matrix", "target", "message"),
     [
