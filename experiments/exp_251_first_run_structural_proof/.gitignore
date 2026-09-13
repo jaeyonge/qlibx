@@ -1,0 +1,4 @@
+driver/
+outputs/**/project/
+outputs/**/*.stdout.json
+outputs/**/*.stderr.txt

@@ -1,0 +1,18 @@
+{
+  "baseline_total_wall_s": 640.0597012910002,
+  "candidate_total_wall_s": 136.941396918,
+  "total_speedup_percent": 78.605,
+  "baseline_datamodel_wall_s": 628.052126583003,
+  "candidate_datamodel_wall_s": 122.96956329100067,
+  "datamodel_speedup_percent": 80.421,
+  "structural_proved": 133888,
+  "structural_audited": 192,
+  "proof_success_percent": 99.857,
+  "floor_activations": 0,
+  "factor_rows": 419576,
+  "factor_byte_equal": true,
+  "economic_results_equal": true,
+  "baseline_datamodel_peak_rss_bytes": 561561600,
+  "candidate_datamodel_peak_rss_bytes": 1909866496,
+  "memory_gate_passed": false
+}

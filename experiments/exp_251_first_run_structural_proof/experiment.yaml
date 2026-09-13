@@ -1,0 +1,40 @@
+schema_version: 1
+experiment_id: exp_251
+name: first-run-structural-proof
+status: concluded
+hypothesis: >-
+  A lower eigenvalue bound derived from construction can remove the first-run spectral audit while
+  retaining the original fallback and exact output.
+input:
+  root: /Users/jason/qlibx/DW
+  prepared: /Users/jason/Documents/Codex/2026-09-10/vqapr-015-performance/experiments/exp_252_actual_dw_full_user_path/outputs/inputs
+  start: '2018-01-02T00:00:00+09:00'
+  end: '2026-07-20T23:59:59+09:00'
+  universe: all 309 historical KOSPI 200 members
+  datamodel_cadence: daily
+  strategy_cadence: weekly
+  risk_scenarios: 64
+baseline:
+  source: exp_253 checked-direct full run
+  total_wall_s: 640.0597012910002
+  datamodel_wall_s: 628.052126583003
+commands:
+  full: uv run python experiments/exp_251_first_run_structural_proof/run.py --mode full
+evidence:
+  test_plan: TEST-PLAN.md
+  directory: outputs
+  final_report: outputs/REPORT.md
+result:
+  total_wall_s: 136.941396918
+  datamodel_wall_s: 122.969563291
+  peak_datamodel_rss_bytes: 1909866496
+  structural_proved: 133888
+  structural_audited: 192
+  floor_activations: 0
+  factor_rows: 419576
+  factor_sha256: e50702562ba46f73296f7c14da38f205ae9bb5c10ea6259d42d56770e688f9d0
+  factor_byte_equal: true
+  economic_results_equal: true
+decision: >-
+  Publish as an opt-in public helper. Time and equality gates pass strongly. The peak-memory gate
+  fails and is retained as a limitation; do not make this an automatic engine path.

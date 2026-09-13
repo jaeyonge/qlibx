@@ -1,0 +1,32 @@
+{
+  "register": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "register",
+      "project.yaml"
+    ],
+    "returncode": 0,
+    "wall_s": 1.9812125419994118,
+    "peak_rss_bytes": 882851840
+  },
+  "check-factor": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "check",
+      "intensive-factor-run"
+    ],
+    "returncode": 0,
+    "wall_s": 0.5918934170040302,
+    "peak_rss_bytes": 116883456
+  },
+  "run-factor": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "run",
+      "intensive-factor-run"
+    ],
+    "returncode": 0,
+    "wall_s": 4.872280832991237,
+    "peak_rss_bytes": 350060544
+  }
+}

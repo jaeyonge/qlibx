@@ -1,0 +1,75 @@
+{
+  "register": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "register",
+      "project.yaml"
+    ],
+    "returncode": 0,
+    "wall_s": 1.9336064590024762,
+    "peak_rss_bytes": 758693888
+  },
+  "check-factor": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "check",
+      "intensive-factor-run"
+    ],
+    "returncode": 0,
+    "wall_s": 0.5946797090000473,
+    "peak_rss_bytes": 118325248
+  },
+  "run-factor": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "run",
+      "intensive-factor-run"
+    ],
+    "returncode": 0,
+    "wall_s": 122.96956329100067,
+    "peak_rss_bytes": 1909866496
+  },
+  "check-strategy": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "check",
+      "intensive-strategy-run"
+    ],
+    "returncode": 0,
+    "wall_s": 0.7097185419988818,
+    "peak_rss_bytes": 119930880
+  },
+  "run-strategy": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "run",
+      "intensive-strategy-run"
+    ],
+    "returncode": 0,
+    "wall_s": 5.346196833008435,
+    "peak_rss_bytes": 493830144
+  },
+  "show-strategy": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "show",
+      "strategy",
+      "intensive-strategy-run/intensive-long-short"
+    ],
+    "returncode": 0,
+    "wall_s": 0.4154968340008054,
+    "peak_rss_bytes": 97239040
+  },
+  "export": {
+    "command": [
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/.venv/bin/vqapr",
+      "export",
+      "intensive-strategy-run/intensive-long-short",
+      "--out",
+      "/Users/jason/Documents/Codex/2026-09-10/vqapr-016-certified-risk/experiments/exp_251_first_run_structural_proof/outputs/direct/full/export"
+    ],
+    "returncode": 0,
+    "wall_s": 4.972134959010873,
+    "peak_rss_bytes": 436600832
+  }
+}
