@@ -1,0 +1,45 @@
+schema_version: 1
+experiment_id: exp_252
+name: risk-memory-and-solver
+status: concluded
+hypothesis: >-
+  The current 1.91 GB peak can be separated from engine and file-cache effects, then reduced before
+  testing a different positive-definite solve.
+relationships:
+  supersedes_measurement: exp_251_first_run_structural_proof
+input:
+  root: /Users/jason/qlibx/DW
+  prepared: /Users/jason/Documents/Codex/2026-09-10/vqapr-015-performance/experiments/exp_252_actual_dw_full_user_path/outputs/inputs
+  calibration: 2026-03-02 through 2026-05-29
+  full: 2018-01-02 through 2026-07-20
+  universe: 309 unsampled instruments
+  scenarios_per_day: 64
+commands:
+  simple_calibration: uv run python experiments/exp_252_risk_memory_and_solver/run.py --mode calibration --engine simple --trial 1
+  structural_calibration: uv run python experiments/exp_252_risk_memory_and_solver/run.py --mode calibration --engine structural --trial 1
+  baseline_full: uv run python experiments/exp_252_risk_memory_and_solver/run.py --mode full --engine simple --trial 1
+  candidate_full: uv run python experiments/exp_252_risk_memory_and_solver/run.py --mode full --engine structural-scipy --trial 1
+evidence:
+  test_plan: TEST-PLAN.md
+  final_report: outputs/REPORT.md
+  directory: outputs
+result:
+  baseline_median_total_s: 123.75390729200444
+  baseline_median_datamodel_s: 111.02613279099751
+  candidate_median_total_s: 91.27415250201011
+  candidate_median_datamodel_s: 78.44745750000584
+  production_total_s: 98.87717575100739
+  production_datamodel_s: 85.85406079200038
+  proof_success: 133888
+  proof_fallback: 192
+  floor_activations: 0
+  factor_byte_equal: true
+  economic_results_equal: true
+  sampled_rss_bytes: 2214608896
+  physical_footprint_peak_bytes: 317194240
+decision: >-
+  Promote the structurally proved SciPy Cholesky solve. It passes time, physical-memory, safety,
+  and result gates. Retain raw RSS as a misleading shared-and-mapped-memory observation.
+freshness:
+  measured_at: '2026-09-13T00:00:00+09:00'
+  branch: codex/v016-certified-risk-onboarding

@@ -1,0 +1,25 @@
+{
+  "simple_full_total_seconds": [125.4737008309894, 116.06151749998389, 123.75390729200444],
+  "simple_full_datamodel_seconds": [112.64206041599391, 103.69653291699069, 111.02613279099751],
+  "candidate_full_total_seconds": [89.76974750001682, 92.53382616599265, 91.27415250201011],
+  "candidate_full_datamodel_seconds": [77.35908166700392, 80.11471100000199, 78.44745750000584],
+  "simple_median_total_seconds": 123.75390729200444,
+  "candidate_median_total_seconds": 91.27415250201011,
+  "median_total_improvement_percent": 26.244,
+  "production_full_total_seconds": 98.87717575100739,
+  "production_datamodel_seconds": 85.85406079200038,
+  "structural_proved": 133888,
+  "structural_audited": 192,
+  "floor_activations": 0,
+  "factor_sha256": "e50702562ba46f73296f7c14da38f205ae9bb5c10ea6259d42d56770e688f9d0",
+  "factor_byte_equal": true,
+  "economic_results_equal": true,
+  "sampled_rss_bytes": 2214608896,
+  "physical_footprint_peak_bytes": 317194240,
+  "python_matrix": {
+    "3.12.4": "1815 passed, 6 skipped before final fallback test; wheel smoke passed",
+    "3.13.1": "1815 passed, 6 skipped before final fallback test; wheel smoke passed",
+    "3.14.7": "1815 passed, 6 skipped before final fallback test; wheel smoke passed"
+  },
+  "primary_final_suite": "1816 passed, 6 skipped"
+}
