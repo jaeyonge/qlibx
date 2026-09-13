@@ -51,6 +51,10 @@ class RiskScores(vq.DataModel):
         ]
 '''
 
+REFERENCE = Path(
+    "src/vqapr/agent/skills/make-datamodel/references/repeated-risk-model.md"
+)
+
 STRATEGY = '''\
 from vqapr import public as vq
 
@@ -80,6 +84,13 @@ def _cli(capsys: pytest.CaptureFixture[str], root: Path, *args: str) -> dict:
 
 def _digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def test_the_reference_covers_first_and_repeated_execution() -> None:
+    text = REFERENCE.read_text(encoding="utf-8")
+    assert "vq.ShrunkCovarianceSolver" in text
+    assert "weighted_returns" in text
+    assert "vq.SpectralFloorSolver" in text
 
 
 @pytest.mark.uc("UC-AGENT-001")
@@ -177,4 +188,3 @@ runs:
     assert {"nav.csv", "holdings.csv", "fills.csv", "weights.csv", "report.json"} <= {
         path.name for path in (tmp_path / "outputs").iterdir()
     }
-

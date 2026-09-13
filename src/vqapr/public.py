@@ -122,7 +122,13 @@ from vqapr.signals.evaluation import (
     information_coefficient,
     rank_information_coefficient,
 )
-from vqapr.signals.risk import SpectralFloorSolver, SpectralFloorStats
+from vqapr.signals.risk import (
+    ShrunkCovarianceResult,
+    ShrunkCovarianceSolver,
+    ShrunkCovarianceStats,
+    SpectralFloorSolver,
+    SpectralFloorStats,
+)
 from vqapr.signals.transform import (
     NeutralizationRefusal,
     fama_french_assign,
@@ -250,6 +256,9 @@ __all__ = (
     "RunSchedule",
     "ScheduledEvent",
     "Series",
+    "ShrunkCovarianceResult",
+    "ShrunkCovarianceSolver",
+    "ShrunkCovarianceStats",
     "Side",
     "SideCost",
     "SimulationFailure",

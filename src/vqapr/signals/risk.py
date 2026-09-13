@@ -16,7 +16,13 @@ from pathlib import Path
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-__all__ = ["SpectralFloorSolver", "SpectralFloorStats"]
+__all__ = [
+    "ShrunkCovarianceResult",
+    "ShrunkCovarianceSolver",
+    "ShrunkCovarianceStats",
+    "SpectralFloorSolver",
+    "SpectralFloorStats",
+]
 
 _MAGIC = "vqapr-spectral-floor-certificates-v1"
 _DIGEST_SIZE = 64
@@ -45,6 +51,142 @@ class SpectralFloorStats:
             "cache_usable": self.cache_usable,
             "cache_warning": self.cache_warning,
         }
+
+
+@dataclass(frozen=True, slots=True)
+class ShrunkCovarianceResult:
+    """One solve and the unfloored variances used to build its covariance."""
+
+    solution: NDArray[np.float64]
+    diagonal: NDArray[np.float64]
+
+
+@dataclass(frozen=True, slots=True)
+class ShrunkCovarianceStats:
+    """Counts that show whether first-run solves avoided spectral inspection."""
+
+    proved: int
+    audited: int
+    floor_fallbacks: int
+    margin_fallbacks: int
+
+    def as_record(self) -> dict[str, int]:
+        """Return JSON-ready evidence for logs and result tables."""
+        return {
+            "proved": self.proved,
+            "audited": self.audited,
+            "floor_fallbacks": self.floor_fallbacks,
+            "margin_fallbacks": self.margin_fallbacks,
+        }
+
+
+class ShrunkCovarianceSolver:
+    """Build and solve a diagonally-shrunk covariance without a needless audit.
+
+    The input is the already weighted observation matrix, not an arbitrary covariance. This lets
+    the solver prove a lower eigenvalue bound from how it constructs the matrix. When that bound
+    does not clear the spectral-floor policy, the original eigendecomposition formula is used.
+    """
+
+    def __init__(
+        self,
+        *,
+        shrinkage: float,
+        ridge: float,
+        relative_floor: float = 1e-3,
+        absolute_floor: float = 1e-7,
+    ) -> None:
+        for value, name in (
+            (shrinkage, "shrinkage"),
+            (ridge, "ridge"),
+            (relative_floor, "relative_floor"),
+            (absolute_floor, "absolute_floor"),
+        ):
+            if not np.isfinite(value):
+                raise ValueError(f"{name} must be finite")
+        if not 0.0 <= shrinkage <= 1.0:
+            raise ValueError("shrinkage must be between zero and one")
+        if ridge <= 0.0:
+            raise ValueError("ridge must be positive")
+        if relative_floor < 0.0:
+            raise ValueError("relative_floor must be non-negative")
+        if absolute_floor <= 0.0:
+            raise ValueError("absolute_floor must be positive")
+        self._shrinkage = float(shrinkage)
+        self._ridge = float(ridge)
+        self._relative_floor = float(relative_floor)
+        self._absolute_floor = float(absolute_floor)
+        self._proved = 0
+        self._audited = 0
+        self._floor_fallbacks = 0
+        self._margin_fallbacks = 0
+        self._covariance: NDArray[np.float64] | None = None
+
+    @property
+    def stats(self) -> ShrunkCovarianceStats:
+        """Current proof and fallback evidence."""
+        return ShrunkCovarianceStats(
+            proved=self._proved,
+            audited=self._audited,
+            floor_fallbacks=self._floor_fallbacks,
+            margin_fallbacks=self._margin_fallbacks,
+        )
+
+    def solve(
+        self, weighted_observations: ArrayLike, target: ArrayLike
+    ) -> ShrunkCovarianceResult:
+        """Construct the regularized covariance and solve its finite linear system."""
+        observations = np.ascontiguousarray(weighted_observations, dtype=np.float64)
+        vector = np.ascontiguousarray(target, dtype=np.float64)
+        if observations.ndim != 2 or observations.shape[0] == 0 or observations.shape[1] == 0:
+            raise ValueError("weighted_observations must be a non-empty matrix")
+        if vector.ndim != 1 or vector.shape[0] != observations.shape[1]:
+            raise ValueError("target must have one value per observation column")
+        if not np.isfinite(observations).all() or not np.isfinite(vector).all():
+            raise ValueError("weighted_observations and target must contain only finite values")
+
+        dimension = observations.shape[1]
+        if self._covariance is None or self._covariance.shape != (dimension, dimension):
+            self._covariance = np.empty((dimension, dimension), dtype=np.float64)
+        covariance = self._covariance
+        np.matmul(observations.T, observations, out=covariance)
+        diagonal = np.diag(covariance).copy()
+        covariance *= 1.0 - self._shrinkage
+        covariance.flat[:: covariance.shape[0] + 1] += (
+            self._shrinkage * diagonal + self._ridge
+        )
+
+        lower_bound = self._ridge + self._shrinkage * float(np.min(diagonal))
+        median_count = dimension // 2 if dimension % 2 == 0 else dimension // 2 + 1
+        median_upper_bound = float(np.trace(covariance)) / median_count
+        floor_upper_bound = max(
+            median_upper_bound * self._relative_floor,
+            self._absolute_floor,
+        )
+        safety_margin = (
+            np.finfo(np.float64).eps
+            * max(float(np.linalg.norm(covariance)) * np.sqrt(dimension), 1.0)
+            * dimension
+            * 64.0
+        )
+        if lower_bound > floor_upper_bound + safety_margin:
+            self._proved += 1
+            solution = np.linalg.solve(covariance, vector)
+        else:
+            self._audited += 1
+            eigenvalues, eigenvectors = np.linalg.eigh(covariance)
+            floor = max(
+                float(np.median(eigenvalues)) * self._relative_floor,
+                self._absolute_floor,
+            )
+            if bool(np.any(eigenvalues < floor)):
+                self._floor_fallbacks += 1
+            else:
+                self._margin_fallbacks += 1
+            solution = eigenvectors @ (
+                (eigenvectors.T @ vector) / np.maximum(eigenvalues, floor)
+            )
+        return ShrunkCovarianceResult(solution=solution, diagonal=diagonal)
 
 
 class SpectralFloorSolver:

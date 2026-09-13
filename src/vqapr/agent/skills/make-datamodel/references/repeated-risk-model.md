@@ -71,7 +71,29 @@ measured over the same dates.
 The generated run must write a reusable dataset, for example `risk-scores-output`. Run it daily if
 the model genuinely produces a daily score. The later strategy may still rebalance weekly.
 
-## 4. Replace only the expensive solve
+## 4. Remove the first-run inspection when the matrix has the supported shape
+
+If the covariance is built as a weighted cross-product, then diagonal shrinkage and a positive
+ridge are added, let vqapr build it. This path can prove safety from construction on the first run.
+It falls back to the original floor formula whenever the proof is not strong enough.
+
+```python
+solver = vq.ShrunkCovarianceSolver(shrinkage=0.05, ridge=1e-6)
+
+# Keep one solver and reuse it. `weighted_returns` already includes sqrt(weights).
+result = solver.solve(weighted_returns, signal)
+adjusted_signal = result.solution
+raw_variance = result.diagonal
+```
+
+Do not pass a covariance built elsewhere and claim it has this shape. The helper accepts weighted
+observations precisely so it owns and can prove the construction. Keep one solver per shrinkage
+policy outside the scenario loop; this also reuses its numerical work area.
+
+Use `solver.stats.as_record()` in a trial run. `proved` counts first-run inspections removed;
+`audited` counts conservative fallbacks. Compare the produced DataModel dataset before adopting it.
+
+## 5. Use certificates for exact repeated arbitrary matrices
 
 Create one solver on the DataModel instance. The relative and absolute floors must be the same as
 the old formula. Give each distinct model policy its own certificate path.
@@ -125,7 +147,7 @@ The certificate is not a DataModel result, model state, or lineage record. It is
 for a performance shortcut. Keep it under `.vqapr/cache/`, out of source control. A malformed or
 incompatible file is left untouched and ignored, so the safe inspection runs again.
 
-## 5. Prove and run the DataModel first
+## 6. Prove and run the DataModel first
 
 ```bash
 uv run vqapr register risk_scores.yaml
@@ -143,7 +165,7 @@ During a small standalone calculation, `solver.stats.as_record()` gives `audited
 command owns its one JSON output line. For the full run, compare the command elapsed times and the
 certificate line count instead.
 
-## 6. Repeat without weakening the check
+## 7. Repeat without weakening the check
 
 ```bash
 time uv run vqapr run risk-scores-run --force
@@ -163,7 +185,7 @@ strategy's economic tables. Distinguish three claims:
 The third is strongest and is not implied by the first two. Component code changes also change the
 run fingerprint even when every economic value agrees.
 
-## 7. Build and execute the weekly long-short strategy
+## 8. Build and execute the weekly long-short strategy
 
 ```bash
 uv run vqapr new strategy weekly-risk-momentum --dataset risk-scores-values
@@ -184,7 +206,7 @@ The StrategyModel reads the latest score, applies the real universe and tradabil
 returns a signed rebalance. Put the weekly cadence in the strategy run's `schedule`; do not make the
 DataModel weekly merely to make the test faster if the research question needs daily values.
 
-## 8. Read and export the result
+## 9. Read and export the result
 
 ```bash
 uv run vqapr show run weekly-risk-momentum-run
