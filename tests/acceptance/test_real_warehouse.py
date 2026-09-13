@@ -178,6 +178,49 @@ def test_committed_fixture_still_matches_the_warehouse(
     )
 
 
+def test_extractor_reuses_only_an_unchanged_source_and_request(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import extract_dw_fixture as extractor
+
+    prices = tmp_path / "prices.csv"
+    members = tmp_path / "members.csv"
+    prices.write_text("prices-v1", encoding="utf-8")
+    members.write_text("members-v1", encoding="utf-8")
+    monkeypatch.setattr(extractor, "PRICES", prices)
+    monkeypatch.setattr(extractor, "MEMBERS", members)
+    monkeypatch.setattr(extractor, "CACHE", tmp_path / "cache")
+    calls = 0
+
+    def fake_extract(spec: object, out: Path) -> dict[str, object]:
+        nonlocal calls
+        calls += 1
+        out.mkdir(parents=True, exist_ok=True)
+        manifest = {
+            "observation_path": "observation_price_daily.parquet",
+            "execution_path": "execution_krx_daily.parquet",
+            "benchmark_path": "benchmark_weight_daily.parquet",
+        }
+        for name in manifest.values():
+            (out / name).write_bytes(f"prepared-{calls}".encode())
+        (out / "fixture.json").write_text(json.dumps(manifest), encoding="utf-8")
+        return manifest
+
+    monkeypatch.setattr(extractor, "_extract_uncached", fake_extract)
+    spec = extractor.FixtureSpec("20260331", "20260401", "20260529", 6)
+    extractor.extract(spec, tmp_path / "first")
+    extractor.extract(spec, tmp_path / "second")
+
+    assert calls == 1
+    assert (tmp_path / "first" / "observation_price_daily.parquet").read_bytes() == (
+        tmp_path / "second" / "observation_price_daily.parquet"
+    ).read_bytes()
+
+    prices.write_text("prices-version-two", encoding="utf-8")
+    extractor.extract(spec, tmp_path / "changed")
+    assert calls == 2
+
+
 def test_committed_benchmark_is_a_dated_coverage_scoped_panel(
     manifest: dict[str, object], benchmark_path: Path, instruments: tuple[str, ...]
 ) -> None:

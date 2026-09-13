@@ -16,7 +16,11 @@ Run it before any showcase or test that requires real inputs::
 from __future__ import annotations
 
 import argparse
+import contextlib
+import hashlib
 import json
+import shutil
+import tempfile
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -26,6 +30,8 @@ import duckdb
 WAREHOUSE = Path("data/DW")
 PRICES = WAREHOUSE / "fng_stock_daily_prices.csv"
 MEMBERS = WAREHOUSE / "fng_k200_members.csv"
+CACHE = Path("data/.vqapr-fixture-cache")
+CACHE_FORMAT = 1
 
 TICKER = "종목약코드"
 TRADE_DATE = "거래일자"
@@ -195,7 +201,7 @@ def _slice(con: duckdb.DuckDBPyConnection, spec: FixtureSpec, tickers: list[str]
     )
 
 
-def extract(spec: FixtureSpec, out_dir: Path) -> dict[str, object]:
+def _extract_uncached(spec: FixtureSpec, out_dir: Path) -> dict[str, object]:
     """Write the observation dataset, the execution input, and a provenance manifest."""
     out_dir.mkdir(parents=True, exist_ok=True)
     observation_path = out_dir / "observation_price_daily.parquet"
@@ -351,6 +357,80 @@ def extract(spec: FixtureSpec, out_dir: Path) -> dict[str, object]:
         "venue_zone": VENUE_ZONE,
     }
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+    return manifest
+
+
+def _cache_key(spec: FixtureSpec) -> str:
+    """Identify the request and the concrete local source files without rescanning their bytes."""
+    sources = []
+    for path in (PRICES, MEMBERS):
+        if not path.is_file():
+            raise FileNotFoundError(f"warehouse input is missing: {path}")
+        stat = path.stat()
+        sources.append(
+            {
+                "path": str(path.resolve()),
+                "size": stat.st_size,
+                "modified_ns": stat.st_mtime_ns,
+            }
+        )
+    identity = {
+        "format": CACHE_FORMAT,
+        "spec": {
+            "asof": spec.asof,
+            "start": spec.start,
+            "end": spec.end,
+            "universe_size": spec.universe_size,
+        },
+        "sources": sources,
+    }
+    return hashlib.sha256(
+        json.dumps(identity, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def _copy_fixture(source: Path, destination: Path) -> dict[str, object]:
+    destination.mkdir(parents=True, exist_ok=True)
+    manifest = json.loads((source / "fixture.json").read_text(encoding="utf-8"))
+    names = (
+        "fixture.json",
+        str(manifest["observation_path"]),
+        str(manifest["execution_path"]),
+        str(manifest["benchmark_path"]),
+    )
+    for name in names:
+        shutil.copy2(source / name, destination / name)
+    return manifest
+
+
+def extract(spec: FixtureSpec, out_dir: Path) -> dict[str, object]:
+    """Write a fixture, reusing an exact prepared copy for an unchanged source and request.
+
+    The local cache is only a speed aid. Its identity includes each source path, byte size, and
+    nanosecond modification time, so a changed warehouse or changed request takes the normal
+    extraction path. The copied fixture files themselves remain byte-for-byte unchanged.
+    """
+    key = _cache_key(spec)
+    cached = CACHE / key
+    required = (
+        "fixture.json",
+        "observation_price_daily.parquet",
+        "execution_krx_daily.parquet",
+        "benchmark_weight_daily.parquet",
+    )
+    if all((cached / name).is_file() for name in required):
+        return _copy_fixture(cached, out_dir)
+
+    manifest = _extract_uncached(spec, out_dir)
+    CACHE.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=f"{key}.", dir=CACHE))
+    try:
+        _copy_fixture(out_dir, staging)
+        with contextlib.suppress(FileExistsError):
+            staging.rename(cached)
+    finally:
+        if staging.exists():
+            shutil.rmtree(staging)
     return manifest
 
 

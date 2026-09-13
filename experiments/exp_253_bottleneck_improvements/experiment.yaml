@@ -23,6 +23,16 @@ results:
     speedup: 11.52
     performance_digest: b74277fb049ef258a186684aa27b8dde22b5bc2f8adea9eeb0921a58de7c50bb
     gate: passed
+  h2:
+    extraction_cold_seconds: 6.94324
+    extraction_warm_seconds: 0.001732
+    repeated_speedup: 4008.89
+    byte_identical: true
+    show_003_baseline_seconds: 7.758
+    show_003_candidate_seconds: 0.99
+    show_004_baseline_seconds: 8.361
+    show_004_candidate_seconds: 1.04
+    gate: passed
 decision: pending
 freshness:
   branch: codex/ff3-bottleneck-diagnosis
