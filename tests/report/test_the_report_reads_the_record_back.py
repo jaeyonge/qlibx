@@ -16,6 +16,13 @@ from pathlib import Path
 
 import pytest
 
+from vqapr.public import (
+    RunReport,
+    StrategyReport,
+    run_report,
+    strategy_performance,
+    strategy_report,
+)
 from vqapr.record import (
     RUN_KIND,
     STRATEGY_KIND,
@@ -23,7 +30,6 @@ from vqapr.record import (
     record_fields,
     write_run_record,
 )
-from vqapr.public import RunReport, StrategyReport, run_report, strategy_report
 from vqapr.report import measure
 
 SEOUL = timezone(timedelta(hours=9))
@@ -300,6 +306,17 @@ def test_the_nav_series_starts_at_the_initial_account_when_the_first_valuation_f
     assert [row.label for row in performance.by_year] == ["2024"]
     assert performance.by_year[0].total_return == performance.total_return
     assert [row.label for row in performance.by_month] == ["2024-01"]
+
+
+def test_performance_only_is_exactly_the_performance_in_the_full_report(store: Path) -> None:
+    assert strategy_performance(store, RUN, S).as_record() == strategy_report(
+        store, RUN, S
+    ).performance.as_record()
+
+    options = {"periods_per_year": 12, "risk_free_annual": Decimal("0.03")}
+    assert strategy_performance(store, RUN, T, **options).as_record() == strategy_report(
+        store, RUN, T, **options
+    ).performance.as_record()
 
 
 def test_per_name_pnl_sums_to_the_change_in_nav_and_splits_by_side(store: Path) -> None:

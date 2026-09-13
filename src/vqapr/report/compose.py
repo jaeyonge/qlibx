@@ -17,6 +17,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from vqapr.record import (
+    read_account_heads,
     read_run_record,
     read_strategy_record,
     read_table,
@@ -26,9 +27,56 @@ from vqapr.record import (
 )
 from vqapr.record.schema import ACCOUNT_TABLE, FILL_TABLE, MONITORING_TABLE, WEIGHT_TABLE
 from vqapr.report import measure
-from vqapr.report.document import RunReport, StrategyReport
+from vqapr.report.document import Performance, RunReport, StrategyReport
 
-__all__ = ["run_report", "strategy_report", "valuation_grid"]
+__all__ = ["run_report", "strategy_performance", "strategy_report", "valuation_grid"]
+
+
+def strategy_performance(
+    root: Path | str,
+    run_id: str,
+    strategy_ref: str | None = None,
+    *,
+    periods_per_year: int | None = None,
+    risk_free_annual: Decimal = Decimal(0),
+) -> Performance:
+    """Performance only, without reading position, fill, weight, or monitoring rows.
+
+    Use this when a factor or comparison needs NAV and returns but not a complete strategy
+    report.  The result is exactly the same ``Performance`` document that
+    ``strategy_report(...).performance`` returns.
+    """
+    root, run_id, strategy_ref = record_address(root, run_id, strategy_ref)
+    resolved = resolve_strategy_ref(root, run_id, strategy_ref)
+    if resolved is None:
+        raise ValueError(f"run {run_id!r} records tables of its own and no strategy")
+    read_strategy_record(root, run_id, resolved)
+    run = read_run_record(root, run_id)
+    initial = run.get("initial_account") or {}
+    initial_nav = (
+        Decimal(str(initial["cash"]))
+        if initial.get("cash") is not None and not initial.get("positions")
+        else None
+    )
+    grid = measure.opening(
+        measure.valuations(read_account_heads(root, run_id, resolved)),
+        initial_cash=initial_nav,
+        period_start=_instant((run.get("period") or {}).get("start")),
+    )
+    if not grid:
+        raise ValueError(f"{run_id!r}/{resolved!r} recorded no valuation; nothing to report")
+    if periods_per_year is None:
+        periods_per_year = measure.infer_periods_per_year([valuation.at for valuation in grid])
+        source = "inferred"
+    else:
+        source = "given"
+    return measure.performance(
+        grid,
+        periods_per_year=periods_per_year,
+        periods_per_year_source=source,
+        risk_free_annual=risk_free_annual,
+        initial_nav=initial_nav,
+    )
 
 
 def strategy_report(

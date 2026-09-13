@@ -99,7 +99,9 @@ class FfLeg(vq.StrategyModel):
   and quantities are then not rounded at all. A pandas rebuild that treats halts and delistings
   the way the account does matched such legs to the last digit; one that drops delisted names and
   re-spreads their weight will not, and that difference is the account's decision, not rounding.
-- Reading back: `strategy_report(store, "<run-id>").performance.returns` per leg. Its instants
+- Reading back: `strategy_performance(store, "<run-id>").returns` per leg. This reads only the
+  account totals needed for returns instead of building position, trading, and intent sections
+  that a factor combination will discard. Its instants
   mix a fixed offset with zone-aware ones, so pass `utc=True` when handing them to pandas.
 - A date-only series such as a risk-free rate registers as `grain: instant`. There is no public
   Python reader for a registered dataset's rows; `vqapr show dataset <id> --limit N` returns them

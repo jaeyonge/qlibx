@@ -732,6 +732,35 @@ def read_table(
             yield from _python_rows(batch, recorded_as_text)
 
 
+def read_account_heads(
+    root: Path | str, run_id: str, strategy_ref: str | None = None
+) -> Iterator[dict[str, Any]]:
+    """Read only the account-total rows and columns needed for performance statistics.
+
+    This is the narrow record-layer operation behind ``strategy_performance``.  A full strategy
+    report still reads every position row.  A returns-only reader must not create those Python
+    objects merely to discard them, so the projection and ``_ACCOUNT`` predicate are handed to
+    Parquet before row conversion.
+    """
+    root, run_id, strategy_ref = record_address(root, run_id, strategy_ref)
+    columns = ["event_time", "instrument", "cash", "nav", "account_version"]
+    for path in _parts(root, run_id, "vqapr.account", strategy_ref):
+        try:
+            table = pq.read_table(
+                path,
+                columns=columns,
+                filters=[("instrument", "=", "_ACCOUNT")],
+            )
+        except (pa.ArrowInvalid, pa.ArrowException, OSError) as damaged:
+            raise ValueError(
+                f"{path} is not a parquet file: {damaged}. The recorder wrote this file, so a "
+                "file that does not open means it was edited or truncated; restore it, or "
+                "re-run under a new run id"
+            ) from damaged
+        for batch in table.to_batches():
+            yield from _python_rows(batch, frozenset())
+
+
 RECORDED_AS_TEXT: Mapping[str, frozenset[str]] = {
     "vqapr.fill": frozenset(
         {
@@ -768,4 +797,3 @@ def table_ids(
     if not directory.is_dir():
         return ()
     return tuple(sorted(path.name for path in directory.iterdir() if path.is_dir()))
-

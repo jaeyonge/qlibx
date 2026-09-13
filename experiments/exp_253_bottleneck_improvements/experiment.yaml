@@ -1,0 +1,28 @@
+schema_version: 1
+experiment_id: exp_253
+name: bottleneck-improvements
+status: running
+hypotheses:
+  h1: Projected account-head reading makes returns-only analysis much faster than a full report.
+  h2: Persistent prepared-fixture reuse removes repeated DW CSV scans without changing artifacts.
+  h3: Multi-alpha setup has a safe shared-lifecycle optimization worth at least ten percent.
+fixed_gates:
+  h1: exact Performance equality and at least 5x on a position-heavy record
+  h2: byte-identical Parquet and at least 5x repeated extraction speedup
+  h3: unchanged evidence boundaries and at least 10 percent paired median speedup
+relationships:
+  based_on:
+    - exp_251_ff3_bottleneck_diagnosis
+    - exp_252_showcase_bottlenecks
+evidence:
+  directory: outputs
+results:
+  h1:
+    baseline_median_seconds: 2.72595
+    candidate_median_seconds: 0.236543
+    speedup: 11.52
+    performance_digest: b74277fb049ef258a186684aa27b8dde22b5bc2f8adea9eeb0921a58de7c50bb
+    gate: passed
+decision: pending
+freshness:
+  branch: codex/ff3-bottleneck-diagnosis

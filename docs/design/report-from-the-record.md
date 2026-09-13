@@ -2,7 +2,8 @@
 
 **Ruling 2026-09-07, by the owner.** Reporting is not a main feature of vqapr, but a run must be
 reportable at the level a paper's table and figure need. The package ships **a Python API only**
-(`vqapr.public.strategy_report`, `vqapr.public.run_report`) — no CLI verb, no plotting
+(`vqapr.public.strategy_report`, `vqapr.public.strategy_performance`,
+`vqapr.public.run_report`) — no CLI verb, no plotting
 dependency. Figures and typeset tables are the agent skill's work, over the values this API
 produces. This follows PRD UC-REPORT-001 as written: "vqapr는 table renderer와 machine-readable
 renderer를 제공하고 visualization은 제공하지 않는다."

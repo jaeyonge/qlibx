@@ -99,8 +99,8 @@ from vqapr.record import (
     strategy_refs,
 )
 from vqapr.record import read_typed_table as read_strategy_table
-from vqapr.report.compose import run_report, strategy_report
-from vqapr.report.document import RunReport, StrategyReport
+from vqapr.report.compose import run_report, strategy_performance, strategy_report
+from vqapr.report.document import Performance, RunReport, StrategyReport
 from vqapr.report.metrics import drawdown, nav_series, returns
 from vqapr.run.assemble import RunResult, StrategyOutcome, freeze, run
 from vqapr.run.engine.calls import DataModelContext, StrategyModelContext
@@ -242,6 +242,7 @@ __all__ = (
     "OptimizeResult",
     "PanelWindow",
     "Part",
+    "Performance",
     "PortfolioDirection",
     "PortfolioTarget",
     "Rebalance",
@@ -328,6 +329,7 @@ __all__ = (
     "shipped_compliance_path",
     "signal_weight",
     "single_name_cap",
+    "strategy_performance",
     "strategy_refs",
     "strategy_report",
     "trade_rules_by_kind",
