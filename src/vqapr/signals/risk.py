@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
+from scipy.linalg import cho_factor, cho_solve
 
 __all__ = [
     "ShrunkCovarianceResult",
@@ -163,15 +164,30 @@ class ShrunkCovarianceSolver:
             median_upper_bound * self._relative_floor,
             self._absolute_floor,
         )
+        roots = np.sqrt(diagonal)
+        norm_upper_bound = float(
+            np.max(
+                (1.0 - self._shrinkage) * roots * roots.sum()
+                + self._shrinkage * diagonal
+                + self._ridge
+            )
+        )
         safety_margin = (
             np.finfo(np.float64).eps
-            * max(float(np.linalg.norm(covariance)) * np.sqrt(dimension), 1.0)
+            * max(norm_upper_bound, 1.0)
             * dimension
             * 64.0
         )
         if lower_bound > floor_upper_bound + safety_margin:
-            self._proved += 1
-            solution = np.linalg.solve(covariance, vector)
+            try:
+                factor = cho_factor(covariance, check_finite=False)
+                solution = cho_solve(factor, vector, check_finite=False)
+            except np.linalg.LinAlgError:
+                solution = self._legacy_solution(covariance, vector)
+                self._audited += 1
+                self._margin_fallbacks += 1
+            else:
+                self._proved += 1
         else:
             self._audited += 1
             eigenvalues, eigenvectors = np.linalg.eigh(covariance)
@@ -187,6 +203,18 @@ class ShrunkCovarianceSolver:
                 (eigenvectors.T @ vector) / np.maximum(eigenvalues, floor)
             )
         return ShrunkCovarianceResult(solution=solution, diagonal=diagonal)
+
+    def _legacy_solution(
+        self, covariance: NDArray[np.float64], vector: NDArray[np.float64]
+    ) -> NDArray[np.float64]:
+        eigenvalues, eigenvectors = np.linalg.eigh(covariance)
+        floor = max(
+            float(np.median(eigenvalues)) * self._relative_floor,
+            self._absolute_floor,
+        )
+        return eigenvectors @ (
+            (eigenvectors.T @ vector) / np.maximum(eigenvalues, floor)
+        )
 
 
 class SpectralFloorSolver:

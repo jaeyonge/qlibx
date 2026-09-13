@@ -37,6 +37,7 @@ dependencies = [
     # package, so `Asia/Seoul` -- the zone of every KRX example -- was an unknown zone until the
     # user installed it themselves (report 2026-09-11, record `263`). Elsewhere the system
     # database answers and this is not installed.
+    "scipy>=1.18,<2",
     "tzdata; sys_platform == 'win32'",
 ]
 

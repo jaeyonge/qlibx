@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+import vqapr.signals.risk as risk_module
 from vqapr.signals.risk import ShrunkCovarianceSolver, SpectralFloorSolver
 
 
@@ -37,7 +38,12 @@ def test_structural_proof_skips_the_first_spectral_audit() -> None:
     legacy_matrix.flat[::4] += 0.2 * expected_diagonal + 0.1
 
     assert np.array_equal(observed.diagonal, expected_diagonal)
-    assert np.array_equal(observed.solution, np.linalg.solve(legacy_matrix, target))
+    assert np.allclose(
+        observed.solution,
+        np.linalg.solve(legacy_matrix, target),
+        rtol=1e-12,
+        atol=1e-12,
+    )
     assert solver.stats.as_record() == {
         "proved": 1,
         "audited": 0,
@@ -60,6 +66,28 @@ def test_structural_solver_falls_back_to_the_original_floor_formula() -> None:
     assert solver.stats.floor_fallbacks == 1
 
 
+def test_failed_positive_factorization_uses_the_original_formula(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observations = np.array([[1.0, 0.2], [0.1, 1.0], [-0.2, 0.3]])
+    target = np.array([0.5, -0.25])
+    solver = ShrunkCovarianceSolver(shrinkage=0.2, ridge=0.1)
+
+    def fail(*_args: object, **_kwargs: object) -> None:
+        raise np.linalg.LinAlgError("injected factorization failure")
+
+    monkeypatch.setattr(risk_module, "cho_factor", fail)
+    observed = solver.solve(observations, target)
+    matrix = observations.T @ observations
+    diagonal = np.diag(matrix).copy()
+    matrix *= 0.8
+    matrix.flat[::3] += 0.2 * diagonal + 0.1
+
+    assert np.array_equal(observed.solution, _legacy(matrix, target))
+    assert solver.stats.audited == 1
+    assert solver.stats.margin_fallbacks == 1
+
+
 def test_structural_proof_has_no_false_safe_random_case() -> None:
     generator = np.random.default_rng(20260913)
     for rows, columns in ((20, 3), (40, 8), (12, 11)):
@@ -76,7 +104,12 @@ def test_structural_proof_has_no_false_safe_random_case() -> None:
 
         assert solver.stats.proved == 1
         assert float(eigenvalues[0]) > floor
-        assert np.array_equal(observed.solution, np.linalg.solve(matrix, target))
+        assert np.allclose(
+            observed.solution,
+            np.linalg.solve(matrix, target),
+            rtol=1e-11,
+            atol=1e-12,
+        )
 
 
 @pytest.mark.parametrize(
