@@ -1,7 +1,7 @@
 schema_version: 1
 experiment_id: exp_253
 name: bottleneck-improvements
-status: running
+status: concluded
 hypotheses:
   h1: Projected account-head reading makes returns-only analysis much faster than a full report.
   h2: Persistent prepared-fixture reuse removes repeated DW CSV scans without changing artifacts.
@@ -33,6 +33,12 @@ results:
     show_004_baseline_seconds: 8.361
     show_004_candidate_seconds: 1.04
     gate: passed
-decision: pending
+  h3:
+    show_005_candidate_median_seconds: 1.74727
+    show_006_candidate_median_seconds: 2.03957
+    show_007_candidate_median_seconds: 1.37960
+    show_008_candidate_median_seconds: 2.37315
+    gate: rejected
+decision: accept h1 and h2; reject h3 because the speed gate and safe evidence boundary were not met
 freshness:
   branch: codex/ff3-bottleneck-diagnosis
