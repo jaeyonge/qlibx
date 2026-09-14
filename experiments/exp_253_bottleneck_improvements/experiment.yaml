@@ -41,4 +41,4 @@ results:
     gate: rejected
 decision: accept h1 and h2; reject h3 because the speed gate and safe evidence boundary were not met
 freshness:
-  branch: codex/ff3-bottleneck-diagnosis
+  branch: codex/v016-certified-risk-onboarding
